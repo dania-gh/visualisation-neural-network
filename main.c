@@ -24,41 +24,24 @@ void matrix_csv(const char *filename,int cols, int lin, float mat[lin][cols])
     fclose(file);
 }
 
-
-
-int main() {
-    #define M 2 
-    #define k 1 
-    #define N 100
-    float X[N][M];
-    float y[N][k];
-
+void creat_X_Y(float X[100][2], float y[100][1])
+{
     const char *fileinput="input.csv";
     const char *fileoutput="output.csv";
 
-    matrix_csv(fileinput, M, N, X);
-    matrix_csv(fileoutput, k, N, y);
+    matrix_csv(fileinput, 2, 100, X);
+    matrix_csv(fileoutput, 1, 100, y);
+}
 
 
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < M; j++) {
-            printf("%f ", X[i][j]);
-        }
-        printf("\n");
-    }
 
-
-    printf("\n");
-
-
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < 1; j++) {
-            printf("%f ", y[i][j]);
-        }
-        printf("\n");
-    }
-
+int main() {
     
+    float X[100][2];
+    float y[100][1];
+    
+    creat_X_Y(X, y);
+
 
     return 0;
 }
