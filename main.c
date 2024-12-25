@@ -3,6 +3,9 @@
 
 #include "convert.h"
 #include "matrice.h"
+
+const double learning_rate = 0.1;
+const int epochs = 10000;
 void printMatrix(matrix* m) {
     for (int i = 0; i < m->row; i++) {
         for (int j = 0; j < m->col; j++) {
@@ -36,5 +39,6 @@ int main ()
     matrix_randomize(output_bias,1);
     //printMatrix(output_bias);
 
+    
 
 }
