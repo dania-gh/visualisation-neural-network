@@ -13,6 +13,7 @@ typedef struct {
 } matrix;
 
 matrix* createMatrix(int row, int col);
+void matrix_randomize(matrix* m, int nb_node);
 
 
 
