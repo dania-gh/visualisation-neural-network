@@ -5,4 +5,7 @@
 #include<stdlib.h>
 #include<math.h>
 
+
+double sigmoid(double z);
+
 #endif
