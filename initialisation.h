@@ -6,8 +6,8 @@
 #include "matrice.h"
 
 typedef struct {
-    matrix** w;  
-    matrix** b;  
+    matrix** weight;  
+    matrix** bias;  
     int num_layers;  
 } Parameters;
 
