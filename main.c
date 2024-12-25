@@ -14,16 +14,19 @@ void printMatrix(matrix* m) {
 int main ()
 {
     srand(time(NULL));
+
     matrix* X = createMatrix(100, 2);
     matrix* Y = createMatrix(100 ,1);
-
     creat_X_Y(X, Y);
-
+    //printf(X)
+    //printf(Y)
     
-
     matrix* hidden_weights = createMatrix(2,2);
     matrix_randomize(hidden_weights ,2);
+    //printMatrix(hidden_weights);
 
-    printMatrix(hidden_weights);
+    matrix* hidden_bias=createMatrix(2,0);
+    matrix_randomize(hidden_bias ,2);
+    printf(hidden_bias);
 
 }
