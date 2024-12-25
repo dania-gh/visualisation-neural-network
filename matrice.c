@@ -11,7 +11,6 @@ matrix* createMatrix(int row, int col) {
     matrice->row = row;
     matrice->col = col;
 
-   
     matrice->values = malloc(row * sizeof(double*));
     if (matrice->values == NULL) {
         printf("Erreur d'allocation mémoire pour les lignes\n");
@@ -19,12 +18,11 @@ matrix* createMatrix(int row, int col) {
         exit(EXIT_FAILURE);
     }
 
-    
     for (int i = 0; i < row; i++) {
         matrice->values[i] = malloc(col * sizeof(double));
         if (matrice->values[i] == NULL) {
-            printf("Erreur d'allocation mémoire pour les colonnes\n");
-            
+            printf("Erreur d'allocation mémoire pour la ligne %d\n", i);
+
             for (int j = 0; j < i; j++) {
                 free(matrice->values[j]);
             }
@@ -33,9 +31,9 @@ matrix* createMatrix(int row, int col) {
             exit(EXIT_FAILURE);
         }
     }
-
     return matrice;
 }
+
 
 
 
