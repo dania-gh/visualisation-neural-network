@@ -30,7 +30,11 @@ int main ()
 
     matrix* output_weights=createMatrix(2,1);
     matrix_randomize(output_weights,1);
-    printMatrix(output_weights);
+    //printMatrix(output_weights);
+
+    matrix* output_bias=createMatrix(1,1);
+    matrix_randomize(output_bias,1);
+    //printMatrix(output_bias);
 
 
 }
