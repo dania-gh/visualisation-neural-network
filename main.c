@@ -18,15 +18,14 @@ int main ()
     matrix* X = createMatrix(100, 2);
     matrix* Y = createMatrix(100 ,1);
     creat_X_Y(X, Y);
-    //printf(X)
-    //printf(Y)
-    
+    //printMatrix(X)
+    //printMatrix(Y)
     matrix* hidden_weights = createMatrix(2,2);
     matrix_randomize(hidden_weights ,2);
     //printMatrix(hidden_weights);
 
-    matrix* hidden_bias=createMatrix(2,0);
+    matrix* hidden_bias=createMatrix(2,1);
     matrix_randomize(hidden_bias ,2);
-    printf(hidden_bias);
+    printMatrix(hidden_bias);
 
 }
