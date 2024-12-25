@@ -26,3 +26,16 @@ void matrix_randomize(matrix* m, int nb_node) {
         }
     }
 }
+
+
+
+void matrix_fill(matrix* m,int n)
+{
+    for(int i = 0;i<m->row;i++)
+    {
+        for(int j= 0 ; j<m->col;j++)
+        {
+            m->values[i][j]=n;
+        }
+    }
+}
