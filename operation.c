@@ -84,3 +84,18 @@ matrix* multi_scaler (matrix* m , double n )
     }
     return mat;
 }
+
+matrix* add_scaler (matrix* m , double n )
+{
+    matrix* mat = matrix_copy(m);
+
+
+    for(int i=0 ; i< m->row; i++)
+    {
+        for(int j=0 ; j< m->col; j++)
+        {
+            mat->values[i][j]+= n;
+        }
+    }
+    return mat;
+}
