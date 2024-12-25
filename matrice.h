@@ -6,6 +6,12 @@
 #include <math.h>
 #include <time.h>
 
+typedef struct {
+    double** values;
+    int row;
+    int col;
+} matrix;
+
 
 
 #endif
