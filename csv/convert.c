@@ -20,3 +20,13 @@ void matrix_csv(const char *filename,int cols, int lin, float mat[lin][cols])
 
     fclose(file);
 }
+
+
+void creat_X_Y(float X[100][2], float y[100][1])
+{
+    const char *fileinput="input.csv";
+    const char *fileoutput="output.csv";
+
+    matrix_csv(fileinput, 2, 100, X);
+    matrix_csv(fileoutput, 1, 100, y);
+}
