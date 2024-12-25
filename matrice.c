@@ -39,3 +39,21 @@ void matrix_fill(matrix* m,int n)
         }
     }
 }
+
+
+matrix* matrix_copy(matrix* m)
+{
+    matrix* mat = createMatrix(m->row, m->col);
+
+
+
+    for(int i = 0 ; i< m->row ; i++)
+    {
+        for ( int j =0 ; j< m->col ; j++)
+        {
+            mat->values[i][j] = m->values[i][j];
+        }
+    }
+
+    return mat;
+}

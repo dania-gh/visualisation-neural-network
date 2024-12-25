@@ -68,3 +68,9 @@ matrix* dot (matrix* m1, matrix* m2)
 
     return m;
 }
+
+
+matrix* multi_scaler (matrix* m , double n )
+{
+    matrix* mat = create
+}

@@ -15,6 +15,7 @@ typedef struct {
 matrix* createMatrix(int row, int col);
 void matrix_randomize(matrix* m, int nb_node);
 void matrix_fill(matrix* m,int n);
+matrix* matrix_copy(matrix* m);
 
 
 
