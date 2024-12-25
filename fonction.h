@@ -7,5 +7,6 @@
 
 
 double sigmoid(double z);
+double sigmoid_deriv(double z);
 
 #endif
