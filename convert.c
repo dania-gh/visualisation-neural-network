@@ -11,7 +11,7 @@ void matrix_csv(const char *filename,int cols, int lin, matrix* mat)
 
     for (int i = 0; i < lin; i++) {
         for (int j = 0; j < cols; j++) {
-            if (fscanf(file, "%f,", mat->values[i][j]) != 1) {
+            if (fscanf(file, "%lf,", mat->values[i][j]) != 1) {
                 printf("Erreur de lecture du fichier\n");
                 fclose(file);
                 exit(EXIT_FAILURE);
