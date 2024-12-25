@@ -99,3 +99,16 @@ matrix* add_scaler (matrix* m , double n )
     }
     return mat;
 }
+
+matrix* matrix_exp(matrix* m)
+{
+    matrix* mat = matrix_copy(m);
+    for(int i=0 ; i< m->row; i++)
+    {
+        for(int j=0 ; j< m->col; j++)
+        {
+            mat->values[i][j]=exp(m->values[i][j]);
+        }
+    }
+    return mat;
+}
