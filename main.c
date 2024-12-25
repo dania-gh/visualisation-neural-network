@@ -26,6 +26,11 @@ int main ()
 
     matrix* hidden_bias=createMatrix(2,1);
     matrix_randomize(hidden_bias ,2);
-    printMatrix(hidden_bias);
+    //printMatrix(hidden_bias);
+
+    matrix* output_weights=createMatrix(2,1);
+    matrix_randomize(output_weights,1);
+    printMatrix(output_weights);
+
 
 }
