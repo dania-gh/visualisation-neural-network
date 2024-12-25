@@ -12,6 +12,8 @@ typedef struct {
     int col;
 } matrix;
 
+matrix* createMatrix(int row, int col);
+
 
 
 #endif
