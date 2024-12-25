@@ -1,19 +1,42 @@
 #include "matrice.h"
 
 
-matrix* createMatrix(int row,int col)
-{
-    matrix* matrice=malloc(sizeof(matrix));
-    matrice->col=col;
-    matrice->row=row;
-    matrice->values=malloc(row*sizeof(double*));
-    for(int i=0;i<row;i++)
-    {
-        matrice->values[i]=malloc(col*sizeof(double));
+matrix* createMatrix(int row, int col) {
+    matrix* matrice = malloc(sizeof(matrix));
+    if (matrice == NULL) {
+        printf("Erreur d'allocation mémoire pour la structure matrix\n");
+        exit(EXIT_FAILURE);
     }
-    return matrice;
 
+    matrice->row = row;
+    matrice->col = col;
+
+   
+    matrice->values = malloc(row * sizeof(double*));
+    if (matrice->values == NULL) {
+        printf("Erreur d'allocation mémoire pour les lignes\n");
+        free(matrice);
+        exit(EXIT_FAILURE);
+    }
+
+    
+    for (int i = 0; i < row; i++) {
+        matrice->values[i] = malloc(col * sizeof(double));
+        if (matrice->values[i] == NULL) {
+            printf("Erreur d'allocation mémoire pour les colonnes\n");
+            
+            for (int j = 0; j < i; j++) {
+                free(matrice->values[j]);
+            }
+            free(matrice->values);
+            free(matrice);
+            exit(EXIT_FAILURE);
+        }
+    }
+
+    return matrice;
 }
+
 
 
 void matrix_randomize(matrix* m, int nb_node) {
