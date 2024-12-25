@@ -14,3 +14,28 @@ matrix* createMatrix(int row,int col)
     return matrice;
 
 }
+
+
+void matrix_randomize(matrix* m, int nb_node) {
+    double min = -1.0 / sqrt(nb_node); 
+    double max = 1.0 / sqrt(nb_node);
+
+    for (int i = 0; i < m->row; i++) {
+        for (int j = 0; j < m->col; j++) {
+            m->values[i][j] = min + (max - min) * ((double)rand() / RAND_MAX);
+        }
+    }
+}
+
+
+
+void matrix_fill(matrix* m,int n)
+{
+    for(int i = 0;i<m->row;i++)
+    {
+        for(int j= 0 ; j<m->col;j++)
+        {
+            m->values[i][j]=n;
+        }
+    }
+}
