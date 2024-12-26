@@ -83,10 +83,11 @@ int main ()
                 hidden_weights->values[h][0] -= learning_rate * hidden_gradient->values[h][0] * X->values[i][0];
                 hidden_weights->values[h][1] -= learning_rate * hidden_gradient->values[h][0] * X->values[i][1];
             }
-            
 
-            
-
+        }
+        
+        if (epoch % 1000 == 0) {
+            printf("Epoch %d, Log Loss moyen : %.4f\n", epoch, total_log_loss / 4);
         }
     } 
     
