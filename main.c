@@ -21,24 +21,30 @@ int main ()
     matrix* X = createMatrix(100, 2);
     matrix* Y = createMatrix(100 ,1);
     creat_X_Y(X, Y);
-    //printMatrix(X)
-    //printMatrix(Y)
+    
     matrix* hidden_weights = createMatrix(2,2);
     matrix_randomize(hidden_weights ,2);
-    //printMatrix(hidden_weights);
+    
 
     matrix* hidden_bias=createMatrix(2,1);
     matrix_randomize(hidden_bias ,2);
-    //printMatrix(hidden_bias);
+    
 
     matrix* output_weights=createMatrix(2,1);
     matrix_randomize(output_weights,1);
-    //printMatrix(output_weights);
+   
 
     matrix* output_bias=createMatrix(1,1);
     matrix_randomize(output_bias,1);
-    //printMatrix(output_bias);
+    
 
+    for (int epoch=0 ; epoch < epochs ; epoch++)
+    {
+        for (int i=0 ; i <100 ; i++)
+        {
+            
+        }
+    } 
     
 
 }
