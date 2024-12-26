@@ -45,8 +45,8 @@ int main ()
 
             matrix *output = createMatrix(1,1);
 
-            output->values[0][0] = sigmoid(hidden_layer->values[0][0] * params->weight[1]->values[0][0] 
-            +hidden_layer->values[1][0] * params->weight[1]->values[1][0] 
+            output->values[0][0] = sigmoid(hidden_layer->values[0][0] * params->weight[1]->values[0][0] +
+            hidden_layer->values[1][0] * params->weight[1]->values[1][0] 
             +params->bias[1]->values[0][0]);
 
             total_log_loss+=log_loss(Y->values[i][0] ,output->values[0][0]);
