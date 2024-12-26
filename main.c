@@ -87,7 +87,7 @@ int main ()
         }
 
         if (epoch % 1000 == 0) {
-            printf("Epoch %d, Log Loss moyen : %.4f\n", epoch, total_log_loss / 4);
+            printf("Epoch %d, Log Loss moyen : %.4f\n", epoch, total_log_loss / 100);
         }
     } 
     
