@@ -24,20 +24,7 @@ int main ()
     matrix* Y = createMatrix(100 ,1);
     creat_X_Y(X, Y);
     
-    matrix* hidden_weights = createMatrix(2,2);
-    matrix_randomize(hidden_weights ,2);
-    
-
-    matrix* hidden_bias=createMatrix(2,1);
-    matrix_fill(hidden_bias,0);
-    
-
-    matrix* output_weights=createMatrix(2,1);
-    matrix_randomize(output_weights,1);
-   
-
-    matrix* output_bias=createMatrix(1,1);
-    matrix_fill(output_bias,0);
+    Parameters* params=initialisation(2,1,2,2);
     
     
 
