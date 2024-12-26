@@ -4,6 +4,7 @@
 #include "convert.h"
 #include "matrice.h"
 #include "fonction.h"
+#include "initialisation.h"
 
 const double learning_rate = 0.1;
 const int epochs = 10000;
