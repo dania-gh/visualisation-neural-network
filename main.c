@@ -33,11 +33,23 @@ int main() {
 
     Parameters* params = initialisation(2, 1, 2, 2);
 
+
+    //print des dimension
+    printMatrixDimensions(params->weight[0], "Poids couche 0");
+    printMatrixDimensions(params->weight[1], "Poids couche 1");
+    printMatrixDimensions(params->bias[0], "Biais couche 0");
+    printMatrixDimensions(params->bias[1], "Biais couche 1");
+
+
+
+
     for (int epoch = 0; epoch < epochs; epoch++) {
         double total_log_loss = 0.0;
 
         for (int i = 0; i < 100; i++) {
             matrix* hidden_layer = createMatrix(2, 1);
+            //print dimension
+            printMatrixDimensions(hidden_layer, "hidden_layer");
 
             for (int h = 0; h < hidden_layer->row; h++) {
                 hidden_layer->values[h][0] = sigmoid(X->values[i][0] * params->weight[0]->values[h][0] +
@@ -46,6 +58,9 @@ int main() {
             }
 
             matrix* output = createMatrix(1, 1);
+            //print dimension
+            printMatrixDimensions(output, "output");
+
 
             output->values[0][0] = sigmoid(hidden_layer->values[0][0] * params->weight[1]->values[0][0] +
                 hidden_layer->values[1][0] * params->weight[1]->values[1][0] +
@@ -62,6 +77,8 @@ int main() {
             params->bias[1]->values[0][0] -= learning_rate * output_gradient;
 
             matrix* hidden_gradient = createMatrix(2, 1);
+            //print dimensions
+            printMatrixDimensions(hidden_gradient, "hidden_gradient");
 
             for (int h = 0; h < hidden_gradient->row; h++) {
                 hidden_gradient->values[h][0] = output_gradient * params->weight[1]->values[h][0] * sigmoid_deriv(hidden_layer->values[h][0]);
