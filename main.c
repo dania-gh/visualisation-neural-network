@@ -70,7 +70,15 @@ int main ()
 
             output_bias->values[0][0] -= learning_rate *output_gradient;
 
-            
+            matrix* hidden_gradient= createMatrix(2,1);
+
+            for (int h = 0; h < hidden_gradient->row; h++)
+            {
+                hidden_gradient->values[h][0] =output_gradient * output_weights->values[h][0] * sigmoid_deriv(hidden_layer->values[h][0]) ;
+
+                
+            }
+
 
             
 
