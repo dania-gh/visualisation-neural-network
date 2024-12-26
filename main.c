@@ -44,7 +44,7 @@ int main ()
     {
         double total_log_loss = 0.0;
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 100; i++)
         {
             matrix* hidden_layer = createMatrix(2, 1);
 
@@ -57,7 +57,7 @@ int main ()
 
             output->values[0][0] = sigmoid( hidden_layer->values[0][0] * output_weights->values[0][0] +  hidden_layer->values[1][0] * output_weights->values[1][0] +  output_bias->values[0][0]);
 
-            total_log_loss=+-log_loss(Y->values[i][0] ,output->values[0][0]);
+            total_log_loss+=log_loss(Y->values[i][0] ,output->values[0][0]);
 
 
             double output_gradient ;
@@ -85,7 +85,7 @@ int main ()
             }
 
         }
-        
+
         if (epoch % 1000 == 0) {
             printf("Epoch %d, Log Loss moyen : %.4f\n", epoch, total_log_loss / 4);
         }
