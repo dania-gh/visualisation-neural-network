@@ -90,6 +90,25 @@ int main ()
             printf("Epoch %d, Log Loss moyen : %.4f\n", epoch, total_log_loss / 100);
         }
     } 
+    printf("\nRésultats après entraînement :\n");
+
+    for (int i = 0; i < 100; i++)
+    {
+        matrix* hidden_layer = createMatrix(2, 1);
+
+            for (int h = 0; h < hidden_layer->row; h++) 
+           {
+                hidden_layer->values[h][0] = sigmoid(X->values[i][0] * hidden_weights->values[h][0] +X->values[i][1] * hidden_weights->values[h][1] + hidden_bias->values[h][0]);
+            }
+
+            matrix *output = createMatrix(1,1);
+
+            output->values[0][0] = sigmoid( hidden_layer->values[0][0] * output_weights->values[0][0] +  hidden_layer->values[1][0] * output_weights->values[1][0] +  output_bias->values[0][0]);
+
+            printf("Entrées : %.1f, %.1f | Sortie calculée : %.2f | Sortie attendue : %.1f\n",
+                    X->values[i][0] , X->values[i][1] , output->values[0][0] , Y->values[i][0]);
+    }
     
+
 
 }
