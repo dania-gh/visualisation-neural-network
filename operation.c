@@ -132,3 +132,17 @@ matrix* matrix_exp(matrix* m)
     }
     return mat;
 }
+
+matrix* inverse(matrix* m)
+{
+    matrix* mat = matrix_copy(m);
+
+    for(int i=0 ; i< m->row; i++)
+    {
+        for(int j=0 ; j< m->col; j++)
+        {
+            mat->values[i][j]=1/m->values[i][j];
+        }
+    }
+    return mat;
+}
