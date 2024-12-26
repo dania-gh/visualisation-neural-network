@@ -10,5 +10,11 @@
 #include "operation.h"
 
 
+typedef struct {
+    int nb_layers;
+    matrix** activ;
+}activation ;
+
+
 
 #endif
