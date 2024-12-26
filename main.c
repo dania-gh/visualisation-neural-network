@@ -44,29 +44,18 @@ int main ()
     {
         double total_log_loss = 0.0;
 
-        for (int i = 0; i < 100; i++)
+        for (int i = 0; i < 4; i++)
         {
-            matrix* hiden_layer = createMatrix(2, 1);
+            matrix* hidden_layer = createMatrix(2, 1);
 
-            for (int h = 0; h < hiden_layer->row; h++) 
+            for (int h = 0; h < hidden_layer->row; h++) 
            {
-                hiden_layer->values[h][0] = sigmoid(X->values[i][0] * hidden_weights->values[h][0] +X->values[i][1] * hidden_weights->values[h][1] + hidden_bias->values[h][0]);
+                hidden_layer->values[h][0] = sigmoid(X->values[i][0] * hidden_weights->values[h][0] +X->values[i][1] * hidden_weights->values[h][1] + hidden_bias->values[h][0]);
             }
 
-            
+            matrix *output = createMatrix(1,1);
 
-
-
-
-
-
-
-
-
-
-
-
-
+            output->values[0][0] = sigmoid( hidden_layer->values[0][0] * output_weights->values[0][0] +  hidden_layer->values[1][0] * output_weights->values[1][0] +  output_bias->values[0][0]);
         }
     } 
     
