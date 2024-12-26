@@ -3,6 +3,7 @@
 
 #include "convert.h"
 #include "matrice.h"
+#include "fonction.h"
 
 const double learning_rate = 0.1;
 const int epochs = 10000;
@@ -43,10 +44,29 @@ int main ()
     {
         double total_log_loss = 0.0;
 
-        for (int i=0 ; i <100 ; i++)
+        for (int i = 0; i < 100; i++)
         {
-            matrix* hiden_layen = createMatrix(2,1);
+            matrix* hiden_layer = createMatrix(2, 1);
+
+            for (int h = 0; h < hiden_layer->row; h++) 
+           {
+                hiden_layer->values[h][0] = sigmoid(X->values[i][0] * hidden_weights->values[h][0] +X->values[i][1] * hidden_weights->values[h][1] + hidden_bias->values[h][0]);
+            }
+
             
+
+
+
+
+
+
+
+
+
+
+
+
+
         }
     } 
     
