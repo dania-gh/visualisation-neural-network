@@ -58,6 +58,12 @@ int main ()
             output->values[0][0] = sigmoid( hidden_layer->values[0][0] * output_weights->values[0][0] +  hidden_layer->values[1][0] * output_weights->values[1][0] +  output_bias->values[0][0]);
 
             total_log_loss=+-log_loss(Y->values[i][0] ,output->values[0][0]);
+
+
+            double output_gradient ;
+            output_gradient=(output->values[0][0]-Y->values[i][0])*sigmoid_deriv(output->values[0][0]);
+            
+
         }
     } 
     
