@@ -62,9 +62,12 @@ int main() {
             printMatrixDimensions(output, "output");
 
 
-            output->values[0][0] = sigmoid(hidden_layer->values[0][0] * params->weight[1]->values[0][0] +
-                hidden_layer->values[1][0] * params->weight[1]->values[1][0] +
-                params->bias[1]->values[0][0]);
+            output->values[0][0] = sigmoid(hidden_layer->values[0][0] * params->weight[1]->values[0][0] + 
+                        hidden_layer->values[1][0] * params->weight[1]->values[0][1] + 
+                        params->bias[1]->values[0][0]);
+
+
+
 
             total_log_loss += log_loss(Y->values[i][0], output->values[0][0]);
 
@@ -81,7 +84,8 @@ int main() {
             printMatrixDimensions(hidden_gradient, "hidden_gradient");
 
             for (int h = 0; h < hidden_gradient->row; h++) {
-                hidden_gradient->values[h][0] = output_gradient * params->weight[1]->values[h][0] * sigmoid_deriv(hidden_layer->values[h][0]);
+                hidden_gradient->values[h][0] = output_gradient * params->weight[1]->values[0][h] * sigmoid_deriv(hidden_layer->values[h][0]);
+
             }
 
             for (int h = 0; h < params->weight[0]->row; h++) {
