@@ -62,6 +62,12 @@ int main ()
 
             double output_gradient ;
             output_gradient=(output->values[0][0]-Y->values[i][0])*sigmoid_deriv(output->values[0][0]);
+
+            for (int h = 0; h < hidden_layer->row; h++)
+            {
+                output_weights->values[h][0]-=learning_rate*output_gradient *hidden_layer->values[h][0];
+            }
+
             
 
         }
