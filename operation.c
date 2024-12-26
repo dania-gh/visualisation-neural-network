@@ -14,7 +14,7 @@ matrix* multiplication (matrix* m1, matrix* m2)
     {
         for(int j= 0 ; j< m1->col ;j++)
         {
-            m->values[i][j] = m1->values[i][j] * m1->values[i][j];
+            m->values[i][j] = m1->values[i][j] * m2->values[i][j];
         }
     }
 
@@ -35,7 +35,7 @@ matrix* addition (matrix* m1, matrix* m2)
     {
         for(int j= 0 ; j< m1->col ;j++)
         {
-            m->values[i][j] = m1->values[i][j] + m1->values[i][j];
+            m->values[i][j] = m1->values[i][j] + m2->values[i][j];
         }
     }
 
@@ -56,7 +56,7 @@ matrix* subtraction (matrix* m1, matrix* m2)
     {
         for(int j = 0 ; j< m1->col ;j++)
         {
-            m->values[i][j] = m1->values[i][j] - m1->values[i][j];
+            m->values[i][j] = m1->values[i][j] - m2->values[i][j];
         }
     }
 
@@ -80,7 +80,7 @@ matrix* dot (matrix* m1, matrix* m2)
         {
             for (int k = 0 ; k < m1->col ; k++)
                 {
-                    m->values[i][j] += m1->values[i][k] * m1->values[k][j];
+                    m->values[i][j] += m1->values[i][k] * m2->values[k][j];
                 }
             
         }
