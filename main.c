@@ -38,12 +38,16 @@ int main ()
 
             for (int h = 0; h < hidden_layer->row; h++) 
            {
-                hidden_layer->values[h][0] = sigmoid(X->values[i][0] * hidden_weights->values[h][0] +X->values[i][1] * hidden_weights->values[h][1] + hidden_bias->values[h][0]);
+                hidden_layer->values[h][0] = sigmoid(X->values[i][0] * params->weight[0]->values[h][0] +
+                X->values[i][1] * params->weight[0]->values[h][1] +
+                params->bias[0]->values[h][0]);
             }
 
             matrix *output = createMatrix(1,1);
 
-            output->values[0][0] = sigmoid( hidden_layer->values[0][0] * output_weights->values[0][0] +  hidden_layer->values[1][0] * output_weights->values[1][0] +  output_bias->values[0][0]);
+            output->values[0][0] = sigmoid(hidden_layer->values[0][0] * params->weight[1]->values[0][0] 
+            +hidden_layer->values[1][0] * params->weight[1]->values[1][0] 
+            +params->bias[1]->values[0][0]);
 
             total_log_loss+=log_loss(Y->values[i][0] ,output->values[0][0]);
 
@@ -51,25 +55,25 @@ int main ()
             double output_gradient ;
             output_gradient=(output->values[0][0]-Y->values[i][0])*sigmoid_deriv(output->values[0][0]);
 
-            for (int h = 0; h < output_weights->row; h++)
+            for (int h = 0; h < params->weight[1]->row; h++)
             {
-                output_weights->values[h][0]-=learning_rate*output_gradient *hidden_layer->values[h][0];
+                params->weight[1]->values[h][0]-=learning_rate*output_gradient *hidden_layer->values[h][0];
             }
 
-            output_bias->values[0][0] -= learning_rate *output_gradient;
+            params->bias[1]->values[0][0] -= learning_rate *output_gradient;
 
             matrix* hidden_gradient= createMatrix(2,1);
 
             for (int h = 0; h < hidden_gradient->row; h++)
             {
-                hidden_gradient->values[h][0] =output_gradient * output_weights->values[h][0] * sigmoid_deriv(hidden_layer->values[h][0]) ;
+                hidden_gradient->values[h][0] =output_gradient * params->weight[1]->values[h][0] * sigmoid_deriv(hidden_layer->values[h][0]) ;
             }
 
 
-            for (int h = 0; h < hidden_weights->row; h++)
+            for (int h = 0; h < params->weight[0]->row; h++)
             {
-                hidden_weights->values[h][0] -= learning_rate * hidden_gradient->values[h][0] * X->values[i][0];
-                hidden_weights->values[h][1] -= learning_rate * hidden_gradient->values[h][0] * X->values[i][1];
+                params->weight[0]->values[h][0] -= learning_rate * hidden_gradient->values[h][0] * X->values[i][0];
+                params->weight[0]->values[h][1] -= learning_rate * hidden_gradient->values[h][0] * X->values[i][1];
             }
 
         }
@@ -86,12 +90,16 @@ int main ()
 
             for (int h = 0; h < hidden_layer->row; h++) 
            {
-                hidden_layer->values[h][0] = sigmoid(X->values[i][0] * hidden_weights->values[h][0] +X->values[i][1] * hidden_weights->values[h][1] + hidden_bias->values[h][0]);
+                hidden_layer->values[h][0] = sigmoid(X->values[i][0] * params->weight[0]->values[h][0] +
+                X->values[i][1] * params->weight[0]->values[h][1] +
+                params->bias[0]->values[h][0]);
             }
 
             matrix *output = createMatrix(1,1);
 
-            output->values[0][0] = sigmoid( hidden_layer->values[0][0] * output_weights->values[0][0] +  hidden_layer->values[1][0] * output_weights->values[1][0] +  output_bias->values[0][0]);
+            output->values[0][0] = sigmoid(hidden_layer->values[0][0] * params->weight[1]->values[0][0] +
+            hidden_layer->values[1][0] * params->weight[1]->values[1][0] +
+            params->bias[1]->values[0][0]);
 
             printf("Entrées : %.1f, %.1f | Sortie calculée : %.2f | Sortie attendue : %.1f\n",
                     X->values[i][0] , X->values[i][1] , output->values[0][0] , Y->values[i][0]);
