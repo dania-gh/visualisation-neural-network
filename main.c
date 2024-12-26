@@ -68,6 +68,10 @@ int main ()
                 output_weights->values[h][0]-=learning_rate*output_gradient *hidden_layer->values[h][0];
             }
 
+            output_bias->values[0][0] -= learning_rate *output_gradient;
+
+            
+
             
 
         }
