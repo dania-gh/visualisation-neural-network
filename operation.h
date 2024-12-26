@@ -13,7 +13,7 @@ matrix* dot (matrix* m1, matrix* m2);
 matrix* multi_scaler (matrix* m , double n );
 matrix* add_scaler (matrix* m , double n );
 matrix* matrix_exp(matrix* m);
-
+matrix* inverse(matrix* m);
 
 
 #endif
