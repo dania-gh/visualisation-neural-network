@@ -28,9 +28,7 @@ int main ()
 
     matrix* hidden_bias=createMatrix(2,1);
     matrix_fill(hidden_bias,0);
-    printMatrix(hidden_bias);
     
-    print("\n");
 
     matrix* output_weights=createMatrix(2,1);
     matrix_randomize(output_weights,1);
@@ -38,16 +36,19 @@ int main ()
 
     matrix* output_bias=createMatrix(1,1);
     matrix_fill(output_bias,0);
-    printMatrix(output_bias);
+    
     
 
-    /*for (int epoch=0 ; epoch < epochs ; epoch++)
+    for (int epoch=0 ; epoch < epochs ; epoch++)
     {
+        double total_log_loss = 0.0;
+
         for (int i=0 ; i <100 ; i++)
         {
+            matrix* hiden_layen = createMatrix(2,1);
             
         }
-    } */
+    } 
     
 
 }
