@@ -67,3 +67,14 @@ void printMatrix(matrix* m) {
         printf("\n");
     }
 }
+
+
+void freeMatrix(matrix* m)
+{
+    for(int i =0 ;i < m->row ; i++)
+    {
+        free(m->values[i]);
+    }
+    free(m->values);
+    free(m);
+}
