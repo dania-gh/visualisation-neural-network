@@ -57,3 +57,13 @@ matrix* matrix_copy(matrix* m)
 
     return mat;
 }
+
+
+void printMatrix(matrix* m) {
+    for (int i = 0; i < m->row; i++) {
+        for (int j = 0; j < m->col; j++) {
+            printf("[%d][%d]  %f  \t", i, j, m->values[i][j]);
+        }
+        printf("\n");
+    }
+}
