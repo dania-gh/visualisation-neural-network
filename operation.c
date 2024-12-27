@@ -6,7 +6,7 @@ matrix* multiplication (matrix* m1, matrix* m2)
     if(m1->row != m2->row || m1->col != m2->col)
     {
         printf("matrix not the same dimension");
-        return ;
+        return NULL;
     }
     matrix* m = createMatrix(m1->row, m1->col);
 
@@ -27,7 +27,7 @@ matrix* addition (matrix* m1, matrix* m2)
     if(m1->row != m2->row || m1->col != m2->col)
     {
         printf("matrix not the same dimension");
-        return ;
+        return NULL;
     }
     matrix* m = createMatrix(m1->row, m1->col);
 
@@ -48,7 +48,7 @@ matrix* subtraction (matrix* m1, matrix* m2)
     if(m1->row != m2->row || m1->col != m2->col)
     {
         printf("matrix not the same dimension");
-        return ;
+        return NULL;
     }
     matrix* m = createMatrix(m1->row, m1->col);
 
@@ -69,7 +69,7 @@ matrix* dot (matrix* m1, matrix* m2)
     if(m1->col != m2->row )
     {
         printf("matrix not the right dimension");
-        return ;
+        return NULL;
     }
     matrix* m = createMatrix(m1->row, m2->col);
     matrix_fill(m,0);
