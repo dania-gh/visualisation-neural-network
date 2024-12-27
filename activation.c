@@ -9,7 +9,7 @@ activation* segmoid (matrix* x, Parameters* p)
         return NULL;
     }
     
-    activation* A = (activation*) malloc(p->num_layers * sizeof(activation));
+    activation* A = (activation*) malloc(sizeof(activation));
 
     if (A == NULL) {
         fprintf(stderr, "Error: Memory allocation failed for activation struct.\n");
