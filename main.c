@@ -9,6 +9,14 @@
 const double learning_rate = 0.1;
 const int epochs = 10000;
 
+void update_weights(matrix* weights, matrix* gradient, double learning_rate) {
+    for (int i = 0; i < weights->row; i++) {
+        for (int j = 0; j < weights->col; j++) {
+            weights->values[i][j] -= learning_rate * gradient->values[i][j];
+        }
+    }
+}
+
 
 int main() {
     srand(time(NULL));
@@ -79,7 +87,7 @@ int main() {
         x_sample->values[1][0] = X->values[i][1];
 
         activation* activations = sigmoid(x_sample, params);
-        
+
         matrix* output = activations->activ[activations->nb_layers - 1];
 
 
