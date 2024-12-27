@@ -1,0 +1,20 @@
+#ifndef activation_h
+#define activation_h
+
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<math.h>
+#include "matrice.h"
+#include "initialisation.h"
+#include "operation.h"
+
+
+typedef struct {
+    int nb_layers;
+    matrix** activ;
+}activation ;
+
+
+
+#endif

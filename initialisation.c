@@ -16,15 +16,15 @@ Parameters* initialisation(int nb_x,int nb_y, int nb_node, int nb_layers)
     {
         if(i==0)
         {
-            p->weight[i] = createMatrix(nb_layers , nb_x);
+            p->weight[i] = createMatrix(nb_node , nb_x);
         }
         else if(i==nb_layers-1)
         {
-            p->weight[i] = createMatrix(nb_layers, nb_layers); 
+            p->weight[i] = createMatrix(nb_y, nb_node); 
         }
         else 
         {
-            p->weight[i] = createMatrix(nb_y , nb_layers);
+            p->weight[i] = createMatrix(nb_node , nb_node);
         }
 
         matrix_randomize(p->weight[i], nb_node);
@@ -32,14 +32,14 @@ Parameters* initialisation(int nb_x,int nb_y, int nb_node, int nb_layers)
 
         if (i== nb_layers-1)
         {
-            p->bias = createMatrix(nb_y	, 1);
+            p->bias[i] = createMatrix(nb_y	, 1);
         }
         else 
         {
-            p->bias = createMatrix(nb_node , 1);
+            p->bias[i] = createMatrix(nb_node , 1);
         }
 
-        matrix_fill(p->bias,0);
+        matrix_fill(p->bias[i],0);
     }
 
     return p;
