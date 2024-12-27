@@ -1,2 +1,105 @@
 #include <stdio.h>
 #include <stdlib.h>
+
+#include "convert.h"
+#include "matrice.h"
+#include "fonction.h"
+#include "initialisation.h"
+
+const double learning_rate = 0.1;
+const int epochs = 10000;
+
+void printMatrix(matrix* m) {
+    for (int i = 0; i < m->row; i++) {
+        for (int j = 0; j < m->col; j++) {
+            printf("Valeur à [%d][%d] : %f\n", i, j, m->values[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    srand(time(NULL));
+
+    matrix* X = createMatrix(100, 2);
+    matrix* Y = createMatrix(100, 1);
+    creat_X_Y(X, Y);
+
+    Parameters* params = initialisation(2, 1, 2, 2);
+
+
+    for (int epoch = 0; epoch < epochs; epoch++) {
+        double total_log_loss = 0.0;
+
+        for (int i = 0; i < 100; i++) {
+            matrix* hidden_layer = createMatrix(2, 1);
+           
+
+            for (int h = 0; h < hidden_layer->row; h++) {
+                hidden_layer->values[h][0] = sigmoid(X->values[i][0] * params->weight[0]->values[h][0] +
+                    X->values[i][1] * params->weight[0]->values[h][1] +
+                    params->bias[0]->values[h][0]);
+            }
+
+            matrix* output = createMatrix(1, 1);
+           
+            output->values[0][0] = sigmoid(hidden_layer->values[0][0] * params->weight[1]->values[0][0] + 
+                        hidden_layer->values[1][0] * params->weight[1]->values[0][1] + 
+                        params->bias[1]->values[0][0]);
+
+
+            total_log_loss += log_loss(Y->values[i][0], output->values[0][0]);
+
+            double output_gradient = (output->values[0][0] - Y->values[i][0]) * sigmoid_deriv(output->values[0][0]);
+
+            for (int h = 0; h < params->weight[1]->row; h++) {
+                params->weight[1]->values[h][0] -= learning_rate * output_gradient * hidden_layer->values[h][0];
+            }
+
+            params->bias[1]->values[0][0] -= learning_rate * output_gradient;
+
+            matrix* hidden_gradient = createMatrix(2, 1);
+            
+
+            for (int h = 0; h < hidden_gradient->row; h++) {
+                hidden_gradient->values[h][0] = output_gradient * params->weight[1]->values[0][h] * sigmoid_deriv(hidden_layer->values[h][0]);
+
+            }
+
+            for (int h = 0; h < params->weight[0]->row; h++) {
+                params->weight[0]->values[h][0] -= learning_rate * hidden_gradient->values[h][0] * X->values[i][0];
+                params->weight[0]->values[h][1] -= learning_rate * hidden_gradient->values[h][0] * X->values[i][1];
+            }
+
+        }
+
+        if (epoch % 1000 == 0) {
+            printf("Epoch %d, Log Loss moyen : %.4f\n", epoch, total_log_loss / 100);
+        }
+    }
+
+    printf("\nRésultats après entraînement :\n");
+
+    for (int i = 0; i < 100; i++) {
+        matrix* hidden_layer = createMatrix(2, 1);
+
+        for (int h = 0; h < hidden_layer->row; h++) {
+            hidden_layer->values[h][0] = sigmoid(X->values[i][0] * params->weight[0]->values[h][0] +
+                X->values[i][1] * params->weight[0]->values[h][1] +
+                params->bias[0]->values[h][0]);
+        }
+
+        matrix* output = createMatrix(1, 1);
+
+        output->values[0][0] = sigmoid(hidden_layer->values[0][0] * params->weight[1]->values[0][0] +
+            hidden_layer->values[1][0] * params->weight[1]->values[0][1] +
+            params->bias[1]->values[0][0]);
+
+        printf("Entrées : %.1f, %.1f | Sortie calculée : %.2f | Sortie attendue : %.1f\n",
+            X->values[i][0], X->values[i][1], output->values[0][0], Y->values[i][0]);
+
+    }
+
+
+    return 0;
+}
