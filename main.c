@@ -51,9 +51,7 @@ int main() {
 
             double output_gradient = (output->values[0][0] - Y->values[i][0]) * sigmoid_deriv(output)->values[0][0];
 
-            for (int h = 0; h < params->weight[1]->row; h++) {
-                params->weight[1]->values[h][0] -= learning_rate * output_gradient * activations->activ[0]->values[h][0];
-            }
+            update_weights(params->weight[1], output_gradient, learning_rate);
 
             params->bias[1]->values[0][0] -= learning_rate * output_gradient;
 
@@ -66,10 +64,7 @@ int main() {
                         sigmoid_deriv(activations->activ[0])->values[h][0];
             }
 
-            for (int h = 0; h < params->weight[0]->row; h++) {
-                params->weight[0]->values[h][0] -= learning_rate * hidden_gradient->values[h][0] * X->values[i][0];
-                params->weight[0]->values[h][1] -= learning_rate * hidden_gradient->values[h][0] * X->values[i][1];
-            }
+            update_weights(params->weight[0], hidden_gradient, learning_rate);
 
         }
 
