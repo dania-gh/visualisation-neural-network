@@ -1,5 +1,19 @@
 #include <SDL2/SDL.h> 
-#include <stdio.h>    
+#include <stdio.h>   
+#include<math.h> 
+
+
+
+void Circle(SDL_Renderer* renderer,int CX,int CY,int rayon){
+    for(int i=0; i<360; i++){
+        double angle = i * M_PI / 180.0;
+        int x = CX + rayon * cos(angle);
+        int y = CY + rayon * sin(angle);
+        SDL_RenderDrawPoint(renderer, x, y);
+    }
+}
+
+
 
 int main(int argc, char* argv[]) {
     
@@ -38,7 +52,7 @@ int main(int argc, char* argv[]) {
     }
 
     
-    SDL_DestroyWindow(window);  /*detruire la fenetre */
+    SDL_DestroyWindow(window);  /*detruire la fenetre*/
     SDL_Quit();                  
 
     return 0; 
