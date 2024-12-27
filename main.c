@@ -33,11 +33,7 @@ int main() {
 
            
 
-            for (int h = 0; h < hidden_layer->row; h++) {
-                hidden_layer->values[h][0] = sigmoid(X->values[i][0] * params->weight[0]->values[h][0] +
-                    X->values[i][1] * params->weight[0]->values[h][1] +
-                    params->bias[0]->values[h][0]);
-            }
+            activation* activation=sigmoid(x_sample,params);
 
             matrix* output = createMatrix(1, 1);
            
