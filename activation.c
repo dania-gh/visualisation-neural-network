@@ -29,35 +29,32 @@ activation* sigmoid (matrix* x, Parameters* p)
         return NULL;
     }
 
-    
-    for (int i = 0; i < p->num_layers ; i++)
+    for (int i = 0; i < p->num_layers; i++) 
     {
-        matrix* z = NULL;
-        if(i==0)
-        {
-            z = dot(p->weight[i],x);
-        }
-        else 
-        {
-            z = dot(p->weight[i],A->activ[i-1]);
-            
-        }
-        z = addition(z,p->bias[i]);
+    matrix* z = NULL;
 
+    if (i == 0) 
+    {
+        z = dot(p->weight[i], x);  
+    }
 
-        matrix* multi = multi_scaler(z ,-1);
-        matrix* expo = matrix_exp(multi);
-        matrix* add =add_scaler(expo,1);
-        A->activ[i]= inverse(add);
+     else 
+    {
+        z = dot(p->weight[i], A->activ[i - 1]);  
+    }
 
-        freeMatrix(add);
-        freeMatrix(expo);
-        freeMatrix(multi);
-        freeMatrix(z);
+    z = addition(z, p->bias[i]); 
+    matrix* multi = multi_scaler(z, -1);  
+    matrix* expo = matrix_exp(multi);  
+    matrix* add = add_scaler(expo, 1);   
+    A->activ[i] = inverse(add);  
+    freeMatrix(add);
+    freeMatrix(expo);
+    freeMatrix(multi);
+    freeMatrix(z);
 
     }
     return A;
-
 }
 
 matrix* sigmoid_deriv(matrix* a)
