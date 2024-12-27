@@ -43,9 +43,16 @@ activation* segmoid (matrix* x, Parameters* p)
             
         }
         z = addition(z,p->bias[i]);
+        matrix* multi = multi_scaler(z ,-1);
+        matrix* expo = matrix_exp(multi);
+        matrix* add =add_scaler(expo,1);
+        A->activ[i]= inverse(add);
 
-        A->activ[i]=inverse(add_scaler(matrix_exp(multi_scaler(z ,-1)),1));
+        freeMatrix(add);
+        freeMatrix(expo);
+        freeMatrix(multi);
         
+
         freeMatrix(z);
 
     }
