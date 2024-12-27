@@ -146,3 +146,17 @@ matrix* inverse(matrix* m)
     }
     return mat;
 }
+
+
+matrix* transpose(matrix* mat)
+{
+    matrix* m = createMatrix(mat->col, mat->row);
+    for(int i = 0 ; i< mat->row ; i++)
+    {
+        for(int j = 0 ; j< mat->col ; j++ )
+        {
+            m->values[j][i] = mat->values[i][j];
+        }
+    }
+    return m;
+}
