@@ -9,6 +9,11 @@
 #include "operation.h"
 #include "activation.h"
 
+typedef struct{
+    int nb_layers;
+    matrix** grad;
+}gradient;
+
 
 
 
