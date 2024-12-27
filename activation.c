@@ -18,11 +18,11 @@ activation* sigmoid (matrix* x, Parameters* p)
 
 
     A->nb_layers = p->num_layers;
-    
-    A->activ = (matrix**) malloc(A->nb_layers * sizeof(matrix));
-    
 
+    
      A->activ = (matrix**)malloc(A->nb_layers * sizeof(matrix*));
+
+
     if (A->activ == NULL) {
         fprintf(stderr, "Error: Memory allocation failed for activation layers.\n");
         free(A); 
@@ -32,7 +32,7 @@ activation* sigmoid (matrix* x, Parameters* p)
     
     for (int i = 0; i < p->num_layers ; i++)
     {
-        matrix* z;
+        matrix* z = NULL;
         if(i==0)
         {
             z = dot(p->weight[i],x);
@@ -43,6 +43,8 @@ activation* sigmoid (matrix* x, Parameters* p)
             
         }
         z = addition(z,p->bias[i]);
+
+
         matrix* multi = multi_scaler(z ,-1);
         matrix* expo = matrix_exp(multi);
         matrix* add =add_scaler(expo,1);
@@ -51,8 +53,6 @@ activation* sigmoid (matrix* x, Parameters* p)
         freeMatrix(add);
         freeMatrix(expo);
         freeMatrix(multi);
-        
-
         freeMatrix(z);
 
     }
