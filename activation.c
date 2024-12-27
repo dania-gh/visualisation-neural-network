@@ -2,7 +2,7 @@
 
 
 
-activation* segmoid (matrix* x, Parameters* p)
+activation* sigmoid (matrix* x, Parameters* p)
 {
     if (x == NULL || p == NULL) {
         fprintf(stderr, "Error: NULL input to segmoid function.\n");
@@ -58,4 +58,17 @@ activation* segmoid (matrix* x, Parameters* p)
     }
     return A;
 
+}
+
+matrix* sigmoid_deriv(matrix* a)
+{
+    matrix* z = creatematrix(a->row,a->col);
+    for(int i=0 ; i< a->row; i++)
+    {
+        for(int j= 0 ; j < a->col ; j++)
+        {
+            z->values[i][j]=a->values[i][j]*(1-a->values[i][j]);
+        }
+    }
+    return z;
 }

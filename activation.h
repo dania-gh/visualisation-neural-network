@@ -15,6 +15,7 @@ typedef struct {
     matrix** activ;
 }activation ;
 
-
+activation* sigmoid (matrix* x, Parameters* p);
+matrix* sigmoid_deriv(matrix* a);
 
 #endif
