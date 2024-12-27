@@ -5,6 +5,7 @@
 #include "matrice.h"
 #include "fonction.h"
 #include "initialisation.h"
+#include "activation.h"
 
 const double learning_rate = 0.1;
 const int epochs = 10000;
