@@ -9,14 +9,6 @@
 const double learning_rate = 0.1;
 const int epochs = 10000;
 
-void printMatrix(matrix* m) {
-    for (int i = 0; i < m->row; i++) {
-        for (int j = 0; j < m->col; j++) {
-            printf("Valeur à [%d][%d] : %f\n", i, j, m->values[i][j]);
-        }
-        printf("\n");
-    }
-}
 
 int main() {
     srand(time(NULL));
