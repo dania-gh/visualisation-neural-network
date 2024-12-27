@@ -8,5 +8,5 @@
 
 double sigmoid(double z);
 double sigmoid_deriv(double z);
-double log_loss(double expected, double predicted);
+
 #endif

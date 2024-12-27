@@ -3,7 +3,7 @@
 
 #include "convert.h"
 #include "matrice.h"
-#include "fonction.h"
+//#include "fonction.h"
 #include "initialisation.h"
 #include "activation.h"
 
@@ -34,14 +34,13 @@ int main() {
            
 
             activation* activation=sigmoid(x_sample,params);
-            
+
 
             matrix* output = activation->activ[activation->nb_layers-1];
            
             
-
-
             total_log_loss += log_loss(Y->values[i][0], output->values[0][0]);
+            
 
             double output_gradient = (output->values[0][0] - Y->values[i][0]) * sigmoid_deriv(output->values[0][0]);
 
