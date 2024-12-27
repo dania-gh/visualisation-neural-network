@@ -25,7 +25,12 @@ int main() {
         double total_log_loss = 0.0;
 
         for (int i = 0; i < 100; i++) {
-            matrix* hidden_layer = createMatrix(2, 1);
+
+
+            matrix* x_sample=createMatrix(2,1);
+            x_sample->values[0][0]=X->values[i][0];
+            x_sample->values[0][1]=X->values[i][1];
+
            
 
             for (int h = 0; h < hidden_layer->row; h++) {
