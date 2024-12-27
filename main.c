@@ -3,7 +3,6 @@
 
 #include "convert.h"
 #include "matrice.h"
-//#include "fonction.h"
 #include "initialisation.h"
 #include "activation.h"
 
@@ -33,19 +32,19 @@ int main() {
 
            
 
-            activation* activation=sigmoid(x_sample,params);
+            activation* activations=sigmoid(x_sample,params);
 
 
-            matrix* output = activation->activ[activation->nb_layers-1];
+            matrix* output = activations->activ[activations->nb_layers-1];
            
             
             total_log_loss += log_loss(Y->values[i][0], output->values[0][0]);
             
 
-            double output_gradient = (output->values[0][0] - Y->values[i][0]) * sigmoid_deriv(output->values[0][0]);
+            double output_gradient = (output->values[0][0] - Y->values[i][0]) * sigmoid_deriv(output)->values[0][0];
 
             for (int h = 0; h < params->weight[1]->row; h++) {
-                params->weight[1]->values[h][0] -= learning_rate * output_gradient * hidden_layer->values[h][0];
+                params->weight[1]->values[h][0] -= learning_rate * output_gradient * activations->activ[0]->values[h][0];
             }
 
             params->bias[1]->values[0][0] -= learning_rate * output_gradient;
@@ -53,9 +52,10 @@ int main() {
             matrix* hidden_gradient = createMatrix(2, 1);
             
 
-            for (int h = 0; h < hidden_gradient->row; h++) {
-                hidden_gradient->values[h][0] = output_gradient * params->weight[1]->values[0][h] * sigmoid_deriv(hidden_layer->values[h][0]);
-
+             for (int h = 0; h < hidden_gradient->row; h++) {
+                hidden_gradient->values[h][0] = output_gradient * 
+                        params->weight[1]->values[0][h] * 
+                        sigmoid_deriv(activations->activ[0])->values[h][0];
             }
 
             for (int h = 0; h < params->weight[0]->row; h++) {
@@ -73,19 +73,15 @@ int main() {
     printf("\nRésultats après entraînement :\n");
 
     for (int i = 0; i < 100; i++) {
-        matrix* hidden_layer = createMatrix(2, 1);
+        
+        matrix* x_sample = createMatrix(2, 1);
+        x_sample->values[0][0] = X->values[i][0];
+        x_sample->values[1][0] = X->values[i][1];
 
-        for (int h = 0; h < hidden_layer->row; h++) {
-            hidden_layer->values[h][0] = sigmoid(X->values[i][0] * params->weight[0]->values[h][0] +
-                X->values[i][1] * params->weight[0]->values[h][1] +
-                params->bias[0]->values[h][0]);
-        }
+        activation* activations = sigmoid(x_sample, params);
+        
+        matrix* output = activations->activ[activations->nb_layers - 1];
 
-        matrix* output = createMatrix(1, 1);
-
-        output->values[0][0] = sigmoid(hidden_layer->values[0][0] * params->weight[1]->values[0][0] +
-            hidden_layer->values[1][0] * params->weight[1]->values[0][1] +
-            params->bias[1]->values[0][0]);
 
         printf("Entrées : %.1f, %.1f | Sortie calculée : %.2f | Sortie attendue : %.1f\n",
             X->values[i][0], X->values[i][1], output->values[0][0], Y->values[i][0]);
