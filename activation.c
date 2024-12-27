@@ -62,7 +62,7 @@ activation* sigmoid (matrix* x, Parameters* p)
 
 matrix* sigmoid_deriv(matrix* a)
 {
-    matrix* z = creatematrix(a->row,a->col);
+    matrix* z = createMatrix(a->row,a->col);
     for(int i=0 ; i< a->row; i++)
     {
         for(int j= 0 ; j < a->col ; j++)
