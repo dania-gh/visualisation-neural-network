@@ -48,7 +48,7 @@ int main() {
            
 
             activation* activations=sigmoid(x_sample,params);
-            matrix* output = activations->activ[activations->nb_layers-1];
+            matrix* output = activations->activ[params->num_layers-1];
            
             
             total_log_loss += log_loss(Y->values[i][0], output->values[0][0]);
@@ -63,14 +63,8 @@ int main() {
             update_weights(params->weight[1], dot(output_gradient, transpose(activations->activ[0])), learning_rate);
             params->bias[1]->values[0][0] -= learning_rate * output_gradient->values[0][0];
 
-            matrix* hidden_gradient = createMatrix(2, 1);
-            
-
-             for (int h = 0; h < hidden_gradient->row; h++) {
-                hidden_gradient->values[h][0] = output_gradient * 
-                        params->weight[1]->values[0][h] * 
-                        sigmoid_deriv(activations->activ[0])->values[h][0];
-            }
+            matrix* hidden_error = dot(transpose(params->weight[1]), output_gradient);
+            matrix* hidden_gradient = multiplication(hidden_error, sigmoid_deriv(activations->activ[0]));
 
             update_weights(params->weight[0], hidden_gradient, learning_rate);
                       
