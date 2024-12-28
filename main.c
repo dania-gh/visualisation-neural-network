@@ -6,6 +6,7 @@
 #include "initialisation.h"
 #include "activation.h"
 #include "back_propagation.h"
+#include "save.h"
 
 const double learning_rate = 0.1;
 const int epochs = 10000;
@@ -68,6 +69,8 @@ int main() {
         }
           
     }
+
+    save_weight_bias(params, "weight_model.bin");
 
     printf("\nRésultats après entraînement :\n");
 
