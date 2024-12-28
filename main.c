@@ -48,7 +48,10 @@ int main() {
             
             total_log_loss += log_loss(Y->values[i][0], output->values[0][0]);
 
-            gradient* g = back_propagation(x_sample, Y, params, activations);
+            matrix* y_sample=createMatrix(1,1);
+            y_sample->values[0][0]=Y->values[i][0];
+
+            gradient* g = back_propagation(x_sample, y_sample, params, activations);
 
             for (int j = 0; j < params->num_layers; j++) 
             {
