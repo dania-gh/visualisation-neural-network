@@ -70,7 +70,7 @@ int main() {
           
     }
 
-    save_weight_bias(params, "weight_bias_model.csv");
+    save_weight_bias(params, "weight.csv","bias.csv");
 
     printf("\nRésultats après entraînement :\n");
 

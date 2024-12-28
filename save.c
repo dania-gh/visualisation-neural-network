@@ -1,42 +1,52 @@
 #include "save.h"
 
-void save_weight_bias(Parameters* params, const char* fichier)
+void save_weight_bias(Parameters* params, const char* fichier_poids, const char* fichier_bias)
 {
-    FILE* f = fopen(fichier, "w");
-    if (f == NULL) 
+   
+    FILE* f_poids = fopen(fichier_poids, "w");
+    if (f_poids == NULL) 
     {
-        printf("Erreur lors de l'ouverture du fichier pour sauvegarder en CSV.\n");
+        printf("Erreur : impossible d'ouvrir le fichier pour les poids.\n");
         return;
     }
 
+    
     for (int i = 0; i < params->num_layers; i++) 
     {
-        
-        for (int r = 0; r < params->weight[i]->row; r++) 
+        for (int r = 0; r < params->weight[i]->row; r++)
         {
             for (int c = 0; c < params->weight[i]->col; c++)
             {
-                fprintf(f, "%lf", params->weight[i]->values[r][c]);
-                if (c < params->weight[i]->col - 1) fprintf(f, ","); 
+                fprintf(f_poids, "%lf", params->weight[i]->values[r][c]);
+                if (c < params->weight[i]->col - 1) fprintf(f_poids, ","); 
             }
 
-            fprintf(f, "\n");
+            fprintf(f_poids, "\n");
         }
+    }
+    fclose(f_poids);
 
-        
-        for (int r = 0; r < params->bias[i]->row; r++)
-        {
-            for (int c = 0; c < params->bias[i]->col; c++)
-            {
-                fprintf(f, "%lf", params->bias[i]->values[r][c]);
-                if (c < params->bias[i]->col - 1) fprintf(f, ","); 
-
-            }
-            fprintf(f, "\n");
-        }
-
-        fprintf(f, "\n");
+    
+    FILE* f_bias = fopen(fichier_bias, "w");
+    if (f_bias == NULL) 
+    {
+        printf("Erreur : impossible d'ouvrir le fichier pour les biais.\n");
+        return;
     }
 
-    fclose(f);
+    
+    for (int i = 0; i < params->num_layers; i++) 
+    {
+        for (int r = 0; r < params->bias[i]->row; r++) 
+        {
+            for (int c = 0; c < params->bias[i]->col; c++) 
+            {
+                fprintf(f_bias, "%lf", params->bias[i]->values[r][c]);
+                if (c < params->bias[i]->col - 1) fprintf(f_bias, ","); 
+            }
+            fprintf(f_bias, "\n");
+        }
+    }
+
+    fclose(f_bias);
 }
