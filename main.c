@@ -50,20 +50,13 @@ int main() {
 
             gradient* g = back_propagation(x_sample, Y, params, activations);
 
-
-            matrix* output_gradient = createMatrix(1, 1);
-            output_gradient->values[0][0] = (output->values[0][0] - Y->values[i][0]) * sigmoid_deriv(output)->values[0][0];
-
-
-            
-
-            update_weights(params->weight[1], dot(output_gradient, transpose(activations->activ[0])), learning_rate);
-            params->bias[1]->values[0][0] -= learning_rate * output_gradient->values[0][0];
-
-            matrix* hidden_error = dot(transpose(params->weight[1]), output_gradient);
-            matrix* hidden_gradient = multiplication(hidden_error, sigmoid_deriv(activations->activ[0]));
-
-            update_weights(params->weight[0], dot(hidden_gradient, transpose(x_sample)), learning_rate);
+            for (int j = 0; j < params->num_layers; j++) 
+            {
+                
+                update_weights(params->weight[j], g->dw[j], learning_rate);
+                
+                params->bias[j]->values[0][0] -= learning_rate * g->db[j]->values[0][0];
+            }
                       
         }
 
