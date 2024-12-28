@@ -15,6 +15,13 @@ void Circle(SDL_Renderer* renderer,int CX,int CY,int rayon){
 
 
 
+void drawLine(SDL_Renderer* renderer, int x1, int y1, int x2, int y2){
+    SDL_RenderDrawLine(renderer, x1, y1, x2, y2);
+    
+}
+
+
+
 int main(int argc, char* argv[]) {
     
 
@@ -37,6 +44,23 @@ int main(int argc, char* argv[]) {
         SDL_Quit(); 
         return -1; 
     }
+    
+    SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+    
+    if (!renderer) {
+        printf("Renderer could not be created! SDL Error: %s\n", SDL_GetError()); 
+        SDL_DestroyWindow(window);  
+        SDL_Quit(); 
+        return -1; 
+    }
+    
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+    SDL_RenderClear(renderer);
+
+    Circle(renderer,400,300,100);
+    drawLine(renderer, 100, 100, 700, 100);
+
+    SDL_RenderPresent(renderer);
 
     
     SDL_Event e; /*pour garder la fenetre ouverte */
