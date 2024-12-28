@@ -20,7 +20,7 @@ int main() {
     matrix* Y = createMatrix(100, 1);
     creat_X_Y(X, Y);
 
-    Parameters* params = initialisation(2, 1, 2, 2);
+    Parameters* params = initialisation(2, 1, 4, 2);
 
     
 
