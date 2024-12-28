@@ -15,6 +15,6 @@ matrix* add_scaler (matrix* m , double n );
 matrix* matrix_exp(matrix* m);
 matrix* inverse(matrix* m);
 matrix* transpose(matrix* mat);
-
+matrix* sum_row (matrix* m);
 
 #endif
