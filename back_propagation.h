@@ -11,7 +11,8 @@
 
 typedef struct{
     int nb_layers;
-    matrix** grad;
+    matrix** dw;
+    matrix ** db;
 }gradient;
 
 
