@@ -5,6 +5,7 @@
 #include "matrice.h"
 #include "initialisation.h"
 #include "activation.h"
+#include "back_propagation.h"
 
 const double learning_rate = 0.1;
 const int epochs = 10000;
@@ -46,7 +47,9 @@ int main() {
            
             
             total_log_loss += log_loss(Y->values[i][0], output->values[0][0]);
-            
+
+            gradient* g = back_propagation(x_sample, Y, params, activations);
+
 
             matrix* output_gradient = createMatrix(1, 1);
             output_gradient->values[0][0] = (output->values[0][0] - Y->values[i][0]) * sigmoid_deriv(output)->values[0][0];
