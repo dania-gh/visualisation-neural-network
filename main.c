@@ -61,8 +61,11 @@ int main() {
 
             gradient->values[0][0] = output_gradient;
             update_weights(params->weight[1], gradient, learning_rate);
+
+            printf("Dimensions des poids[1] : %d x %d\n", params->weight[1]->row, params->weight[1]->col);
+
             printf("Poids après mise à jour [1]: %.5f\n", params->weight[1]->values[0][0]);
-            printf("Poids après mise à jour [2]: %.5f\n", params->weight[1]->values[1][0]);
+            printf("Poids après mise à jour [2]: %.5f\n", params->weight[1]->values[0][1]);
 
             params->bias[1]->values[0][0] -= learning_rate * output_gradient;
 
