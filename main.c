@@ -54,7 +54,8 @@ int main() {
             total_log_loss += log_loss(Y->values[i][0], output->values[0][0]);
             
 
-            double output_gradient = (output->values[0][0] - Y->values[i][0]) * sigmoid_deriv(output)->values[0][0];
+            matrix* output_gradient = createMatrix(1, 1);
+            output_gradient->values[0][0] = (output->values[0][0] - Y->values[i][0]) * sigmoid_deriv(output)->values[0][0];
 
 
             matrix* gradient = createMatrix(1, 1);
