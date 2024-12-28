@@ -54,14 +54,17 @@ gradient* back_propagation(matrix* x, matrix* y, Parameters* p, activation* A)
             matrix* deriv = sigmoid_deriv(A->activ[i]);
             matrix* trans = transpose(p->weight[i+1]);
 
-            printf("Dimensions de trans (p->weight[%d]) : %d x %d\n", i + 1, trans->row, trans->col);
-            printf("Dimensions de dz2 : %d x %d\n", dz2->row, dz2->col);
-
-
-
-             if (trans == NULL || dz2 == NULL || trans->row != dz2->col) {
+            if (trans == NULL || dz2 == NULL || trans->col != dz2->row) {
                 printf("Erreur : Dimensions incompatibles pour le produit matriciel trans * dz2\n");
+                printf("Dimensions de trans : %d x %d\n", trans->row, trans->col);
+                printf("Dimensions de dz2 : %d x %d\n", dz2->row, dz2->col);
                 return NULL;
+            }
+
+            
+            if (dz2->col == 1 && dz2->row != trans->col) {
+                printf("Ajustement des dimensions de dz2...\n");
+                dz2->row = trans->col; 
             }
 
 
