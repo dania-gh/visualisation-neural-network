@@ -86,7 +86,7 @@ int main() {
 
         activation* activations = sigmoid(x_sample, params);
 
-        matrix* output = activations->activ[activations->nb_layers - 1];
+        matrix* output = activations->activ[params->num_layers - 1];
 
 
         printf("Entrées : %.1f, %.1f | Sortie calculée : %.2f | Sortie attendue : %.1f\n",
