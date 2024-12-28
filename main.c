@@ -54,6 +54,7 @@ int main() {
             
 
             double output_gradient = (output->values[0][0] - Y->values[i][0]) * sigmoid_deriv(output)->values[0][0];
+            printf("output_gradient: %.5f\n", output_gradient);
 
 
             //matrix* gradient = createMatrix(1, 1);
