@@ -6,7 +6,6 @@
 #include "initialisation.h"
 #include "activation.h"
 #include "back_propagation.h"
-#include "save.h"
 #include "load.h"
 
 matrix* predict(matrix* x_sample, Parameters* params) {
@@ -18,11 +17,11 @@ int main ()
     
     Parameters* params = initialisation(2, 1, 4, 2);
 
-    load_weight_bias(params, "weight.csv", "bias.csv");
+    load_weight_bias(params, "../model_neural/weight.csv", "../model_neural/bias.csv");
 
     matrix* nouvelle_entree = createMatrix(2, 1);
-    nouvelle_entree->values[0][0] = 0.7; 
-    nouvelle_entree->values[1][0] = 0.2; 
+    nouvelle_entree->values[0][0] = 0.63; 
+    nouvelle_entree->values[1][0] = 4.46; 
 
     matrix* sortie = predict(nouvelle_entree, params);
 
