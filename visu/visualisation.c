@@ -69,6 +69,7 @@ int main(int argc, char* argv[]) {
     Circle(renderer,600,300,20);
     Circle(renderer,400,500,20);
     Circle(renderer,400,100,20);
+    Circle(renderer,400,500,20);
 
     
 
