@@ -58,14 +58,10 @@ int main() {
             output_gradient->values[0][0] = (output->values[0][0] - Y->values[i][0]) * sigmoid_deriv(output)->values[0][0];
 
 
-            matrix* gradient = createMatrix(1, 1);
-
-            gradient->values[0][0] = output_gradient;
-            update_weights(params->weight[1], gradient, learning_rate);
-
             
 
-            params->bias[1]->values[0][0] -= learning_rate * output_gradient;
+            update_weights(params->weight[1], dot(output_gradient, transpose(activations->activ[0])), learning_rate);
+            params->bias[1]->values[0][0] -= learning_rate * output_gradient->values[0][0];
 
             matrix* hidden_gradient = createMatrix(2, 1);
             
