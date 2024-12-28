@@ -31,12 +31,16 @@ int main() {
     for (int epoch = 0; epoch < epochs; epoch++) {
         double total_log_loss = 0.0;
 
+        /*testtttttttt*/
+        matrix* gradient = createMatrix(1, 1); 
+
         for (int i = 0; i < 100; i++) {
 
 
             matrix* x_sample=createMatrix(2,1);
+            
             x_sample->values[0][0]=X->values[i][0];
-            x_sample->values[0][1]=X->values[i][1];
+            x_sample->values[1][0]=X->values[i][1];
 
            
 
@@ -52,7 +56,7 @@ int main() {
             double output_gradient = (output->values[0][0] - Y->values[i][0]) * sigmoid_deriv(output)->values[0][0];
 
 
-            matrix* gradient = createMatrix(1, 1);
+            //matrix* gradient = createMatrix(1, 1);
             gradient->values[0][0] = output_gradient;
             update_weights(params->weight[1], gradient, learning_rate);
 
@@ -69,11 +73,27 @@ int main() {
 
             update_weights(params->weight[0], hidden_gradient, learning_rate);
 
+            
         }
+
+
+        /*testttttttttttttttttttttttt*/
+        double gradient_norm = 0.0;
+        for (int i = 0; i < gradient->row; i++) {
+            for (int j = 0; j < gradient->col; j++) {
+                gradient_norm += gradient->values[i][j] * gradient->values[i][j];
+            }
+        }
+        
+        
 
         if (epoch % 1000 == 0) {
             printf("Epoch %d, Log Loss moyen : %.4f\n", epoch, total_log_loss / 100);
+            printf("Norme des gradients à l'époque %d, échantillon %d: %.5f\n", epoch,  sqrt(gradient_norm));
         }
+
+        
+          
     }
 
     printf("\nRésultats après entraînement :\n");
