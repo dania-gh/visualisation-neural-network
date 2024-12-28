@@ -29,7 +29,7 @@ gradient* back_propagation(matrix* x, matrix* y, Parameters* p, activation* A)
             matrix* dott = dot(trans,dz2);
             dz1 = multiplication(dott,deriv);
             freeMatrix(dz2);
-            dz2 = copy(dz1);
+            dz2 = matrix_copy(dz1);
             freeMatrix(dott);
             freeMatrix(trans);
             freeMatrix(deriv);
