@@ -16,6 +16,8 @@ typedef struct{
 }gradient;
 
 
+gradient* back_propagation(matrix* x, matrix* y, Parameters* p, activation* A);
+
 
 
 #endif
