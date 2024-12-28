@@ -66,7 +66,7 @@ int main() {
             matrix* hidden_error = dot(transpose(params->weight[1]), output_gradient);
             matrix* hidden_gradient = multiplication(hidden_error, sigmoid_deriv(activations->activ[0]));
 
-            update_weights(params->weight[0], hidden_gradient, learning_rate);
+            update_weights(params->weight[0], dot(hidden_gradient, transpose(x_sample)), learning_rate);
                       
         }
 
