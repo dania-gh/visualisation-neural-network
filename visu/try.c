@@ -115,7 +115,21 @@ int main(int argc, char* argv[]) {
         int y_pos=layer_positions[layer];
         int alpha=255;
 
-        
+        if (layer == 0) {
+                    filledCircleRGBA(renderer, x_pos, y_pos, r, 204, 0, 0, alpha1); 
+                } else if (layer == 1) {
+                    filledCircleRGBA(renderer, x_pos, y_pos, r, 255, 128, 0, alpha2);
+                } else {
+                    filledCircleRGBA(renderer, x_pos, y_pos, r, 0, 128, 255, alpha3); 
+                }
+            }if (layer == 0) {
+                    filledCircleRGBA(renderer, x_pos, y_pos, r, 204, 0, 0, alpha1); 
+                } else if (layer == 1) {
+                    filledCircleRGBA(renderer, x_pos, y_pos, r, 255, 128, 0, alpha2);
+                } else {
+                    filledCircleRGBA(renderer, x_pos, y_pos, r, 0, 128, 255, alpha3); 
+                }
+            }
 
 
 
