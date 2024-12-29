@@ -28,7 +28,8 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    
+    SDL_SetRenderDrawColor(renderer, 30, 30, 30, 255);
+    SDL_RenderClear(renderer);
     
     //SDL_Delay(5000);
 
