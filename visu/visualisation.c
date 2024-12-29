@@ -3,37 +3,26 @@
 #include <math.h>
 
 void Circle(SDL_Renderer* renderer, int CX, int CY, int rayon) {
-    
-    for (int i = 0; i < 360; i++) {
-        double angle = i * M_PI / 180.0;
-        int x = CX + rayon * cos(angle);
-        int y = CY + rayon * sin(angle);
-        
-        
-        if (x >= 0 && x < 800 && y >= 0 && y < 600) {
-            SDL_RenderDrawPoint(renderer, x, y);
-        }
-    }
-}
+    int x = rayon, y = 0;
+    int err = 0;
 
-void drawLine(SDL_Renderer* renderer, int x1, int y1, int x2, int y2) {
-    int dx = abs(x2 - x1);
-    int dy = abs(y2 - y1);
-    int sx = (x1 < x2) ? 1 : -1;
-    int sy = (y1 < y2) ? 1 : -1;
-    int err = dx - dy;
+    while (x >= y) {
+        SDL_RenderDrawPoint(renderer, CX + x, CY + y);
+        SDL_RenderDrawPoint(renderer, CX + y, CY + x);
+        SDL_RenderDrawPoint(renderer, CX - y, CY + x);
+        SDL_RenderDrawPoint(renderer, CX - x, CY + y);
+        SDL_RenderDrawPoint(renderer, CX - x, CY - y);
+        SDL_RenderDrawPoint(renderer, CX - y, CY - x);
+        SDL_RenderDrawPoint(renderer, CX + y, CY - x);
+        SDL_RenderDrawPoint(renderer, CX + x, CY - y);
 
-    while (1) {
-        SDL_RenderDrawPoint(renderer, x1, y1);
-        if (x1 == x2 && y1 == y2) break;
-        int e2 = 2 * err;
-        if (e2 > -dy) {
-            err -= dy;
-            x1 += sx;
+        if (err <= 0) {
+            y += 1;
+            err += 2 * y + 1;
         }
-        if (e2 < dx) {
-            err += dx;
-            y1 += sy;
+        if (err > 0) {
+            x -= 1;
+            err -= 2 * x + 1;
         }
     }
 }
@@ -69,32 +58,38 @@ int main(int argc, char* argv[]) {
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderClear(renderer);
 
-    int x_horizental = 400;  
+    
     int rayon = 50;     
     int vertical = 120;  
-    int num_circles = 6; 
+    
 
     int x_gauche=100;
-    for(int i=0; i<num_circles; i++){
+    for(int i=0; i<1; i++){
         int y_gauche = 200 + i * vertical;
+
         Circle(renderer, x_gauche, y_gauche, rayon);
     }
 
-    
+    int x_droite = 500;
+    for(int i=0; i<num_circles; i++){
+        int y_droite = 100 + i * vertical;
+        Circle(renderer, x_droite, y_droite, rayon);
+
+    }
+        
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
-
-    for (int i = 0; i < num_circles; i++) {
-        int y_horizental = 100 + i * vertical; 
-        Circle(renderer, x_horizental, y_horizental, rayon);
-    }
-
-    
-    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-    drawLine(renderer, 100, 100, 700, 500);
-
-    
     SDL_RenderPresent(renderer);
+
+    
+
+
+
+   
+
+    
+
+
 
 
     SDL_Event e;
