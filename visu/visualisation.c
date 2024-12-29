@@ -66,9 +66,12 @@ int main(int argc, char* argv[]) {
     int x_gauche=100;
     for(int i=0; i<1; i++){
         int y_gauche = 200 + i * vertical;
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
         Circle(renderer, x_gauche, y_gauche, rayon);
     }
+
+    
 
     int x_droite = 500;
     for(int i=0; i<num_circles; i++){
