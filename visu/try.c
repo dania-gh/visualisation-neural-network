@@ -110,6 +110,13 @@ int main(int argc, char* argv[]) {
             int x_spacing = (width - 200) / (num_neurons + 1);
     }
 
+    for(int neuron = 0; neuron < num_neurons; neuron++){
+        int x_pos=100+(neuron+ 1 )*x_spacing;
+        int y_pos=layer_positions[layer];
+        int alpha=255;
+
+        
+
 
 
 
