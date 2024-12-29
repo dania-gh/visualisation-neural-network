@@ -11,7 +11,7 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    SDL_Window* window = SDL_CreateWindow("SDL2_gfx Circle", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
+    SDL_Window* window = SDL_CreateWindow("Neural Network Visualisation", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
     if (!window) {
         printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
         SDL_Quit();
