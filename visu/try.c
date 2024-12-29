@@ -115,11 +115,16 @@ int main(int argc, char* argv[]) {
     lineRGBA(renderer, 100, height / 2 + 100, 350, i, 255, 128, 0, alpha1);
     lineRGBA(renderer, 650, i, 900, height / 2, 0,128,255, alpha3); 
 
-    
+    filledCircleRGBA(renderer, 350, i, r, 30, 30, 30, 255); //so the line doesnt apear
+    filledCircleRGBA(renderer, 650, i, r, 30, 30, 30, 255);
+
     filledCircleRGBA(renderer, 350, i, r, i, 100, 200, alpha2); 
     filledCircleRGBA(renderer, 650, i, r, 100, 200, i, alpha3);
     }
 
+    filledCircleRGBA(renderer, 100, height/2-100, r, 30, 30, 30, 255);
+    filledCircleRGBA(renderer, 100, height/2+100, r, 30, 30, 30, 255);
+    filledCircleRGBA(renderer, 900, height/2, r, 30, 30, 30, 255);
 
     filledCircleRGBA(renderer, 100, height/2-100, r, 204, 0, 0, alpha1);
     filledCircleRGBA(renderer, 100, height/2+100, r, 255, 128, 0, alpha1);
