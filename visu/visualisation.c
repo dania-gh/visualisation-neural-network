@@ -64,12 +64,14 @@ int main(int argc, char* argv[]) {
     SDL_RenderClear(renderer);
 
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-    Circle(renderer, 400, 300, 100);
-    Circle(renderer,200,300,20);
-    Circle(renderer,600,300,20);
-    Circle(renderer,400,500,20);
-    Circle(renderer,400,100,20);
-    Circle(renderer,400,500,20);
+    for (int i = 0; i < 10; i++) {
+    int x = rand() % 800; 
+    int y = rand() % 600;  
+    int r = 10 + rand() % 40; 
+    Circle(renderer, x, y, r);
+}
+
+
 
     
 
