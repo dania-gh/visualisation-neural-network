@@ -12,10 +12,14 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
+<<<<<<< HEAD
 
     
     SDL_Window* window = SDL_CreateWindow("Neural Network Visualisation", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
 
+=======
+    SDL_Window* window = SDL_CreateWindow("Neural Network Visualisation", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
+>>>>>>> 1ff1f872ee44dd146e7c39b4c56e9ccf99f0621c
     if (!window) {
         printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
         SDL_Quit();
@@ -134,10 +138,36 @@ int main(int argc, char* argv[]) {
         elapsedTime = 0;
     }
 
+<<<<<<< HEAD
     
     SDL_SetRenderDrawColor(renderer, 30, 30, 30, 255);
     SDL_RenderClear(renderer);
     
+=======
+    int alpha1, alpha2,alpha3,alpha4;
+    
+    Uint32 startTime = SDL_GetTicks();
+    Uint32 duration = 1000;
+    SDL_Event e; /*pour garder la fenetre ouverte */
+    int quit = 0;
+     while (!quit) { 
+        while (SDL_PollEvent(&e) != 0) { 
+            if (e.type == SDL_QUIT) {   
+                quit = 1;  
+            }
+        }
+
+    Uint32 elapsedTime = SDL_GetTicks() - startTime;
+    if (elapsedTime > 8 * duration ) {
+        startTime = SDL_GetTicks();
+        elapsedTime = 0;
+    }
+
+    
+    SDL_SetRenderDrawColor(renderer, 30, 30, 30, 255);
+    SDL_RenderClear(renderer);
+    
+>>>>>>> 1ff1f872ee44dd146e7c39b4c56e9ccf99f0621c
     if (SDL_GetTicks() - startTime < duration) {
             
             alpha1 = 255; 
@@ -226,7 +256,10 @@ int main(int argc, char* argv[]) {
     //SDL_Delay(5000);
 
     
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1ff1f872ee44dd146e7c39b4c56e9ccf99f0621c
     }
 
     SDL_DestroyRenderer(renderer);
