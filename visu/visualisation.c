@@ -63,8 +63,13 @@ int main(int argc, char* argv[]) {
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderClear(renderer);
 
+    int x_horizental = 400;  
+    int rayon = 50;     
+    int vertical = 120;  
+    int num_circles = 5;  
+
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 5; i++) {
     int x = rand() % 800; 
     int y = rand() % 600;  
     int r = 10 + rand() % 40; 
