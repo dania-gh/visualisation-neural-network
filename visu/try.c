@@ -42,7 +42,7 @@ int main(int argc, char* argv[]) {
         }
 
     Uint32 elapsedTime = SDL_GetTicks() - startTime;
-    if (elapsedTime > 4 * duration) {
+    if (elapsedTime > 8 * duration ) {
         startTime = SDL_GetTicks();
         elapsedTime = 0;
     }
@@ -64,7 +64,7 @@ int main(int argc, char* argv[]) {
             alpha3 = 70;
             alpha4 = 70;
     }
-    else{
+    else if(SDL_GetTicks() - startTime >= duration+1000 && SDL_GetTicks() - startTime < duration + 3000){
         alpha1 = 70; 
             alpha2 = 70;
             alpha3 = 255;
@@ -72,9 +72,35 @@ int main(int argc, char* argv[]) {
             {
                 alpha3 = 70;
                 alpha4 = 255;
-            }
-            
+            }  
+    }else if(SDL_GetTicks() - startTime >= duration+3000 && SDL_GetTicks() - startTime < duration + 4000)
+    {
+        alpha1 = 70; 
+            alpha2 = 70;
+            alpha3 = 255;
+            alpha4=70;
+    }else if(SDL_GetTicks() - startTime >= duration+4000 && SDL_GetTicks() - startTime < duration + 5000)
+    {
+        alpha1 = 70; 
+            alpha2 = 255;
+            alpha3 = 70;
+            alpha4 = 70;
     }
+    else if (SDL_GetTicks() - startTime >= duration+5000 && SDL_GetTicks() - startTime < duration + 6000){
+        alpha1 = 255; 
+            alpha2 = 70;
+            alpha3 = 70;
+            alpha4 = 70;
+    }
+    else{
+        alpha1 = 70; 
+            alpha2 = 70;
+            alpha3 = 70;
+            alpha4 = 70;
+    }
+
+
+
     int r = 40;
     
     for (int i = 200; i <= 800; i += 200)
