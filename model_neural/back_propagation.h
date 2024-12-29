@@ -11,9 +11,12 @@
 
 typedef struct{
     int nb_layers;
-    matrix** grad;
+    matrix** dw;
+    matrix ** db;
 }gradient;
 
+
+gradient* back_propagation(matrix* x, matrix* y, Parameters* p, activation* A);
 
 
 

@@ -5,17 +5,13 @@
 #include "matrice.h"
 #include "initialisation.h"
 #include "activation.h"
+#include "back_propagation.h"
+#include "save.h"
 
 const double learning_rate = 0.1;
 const int epochs = 10000;
 
-void update_weights(matrix* weights, matrix* gradient, double learning_rate) {
-    for (int i = 0; i < weights->row; i++) {
-        for (int j = 0; j < weights->col; j++) {
-            weights->values[i][j] -= learning_rate * gradient->values[i][j];
-        }
-    }
-}
+
 
 
 int main() {
@@ -25,7 +21,7 @@ int main() {
     matrix* Y = createMatrix(100, 1);
     creat_X_Y(X, Y);
 
-    Parameters* params = initialisation(2, 1, 2, 2);
+    Parameters* params = initialisation(2, 1, 4, 2);
 
     
 
@@ -48,34 +44,23 @@ int main() {
            
 
             activation* activations=sigmoid(x_sample,params);
-            matrix* output = activations->activ[activations->nb_layers-1];
+            matrix* output = activations->activ[params->num_layers-1];
            
             
             total_log_loss += log_loss(Y->values[i][0], output->values[0][0]);
-            
 
-            double output_gradient = (output->values[0][0] - Y->values[i][0]) * sigmoid_deriv(output)->values[0][0];
+            matrix* y_sample=createMatrix(1,1);
+            y_sample->values[0][0]=Y->values[i][0];
 
+            gradient* g = back_propagation(x_sample, y_sample, params, activations);
 
-            matrix* gradient = createMatrix(1, 1);
-
-            gradient->values[0][0] = output_gradient;
-            update_weights(params->weight[1], gradient, learning_rate);
-
-            
-
-            params->bias[1]->values[0][0] -= learning_rate * output_gradient;
-
-            matrix* hidden_gradient = createMatrix(2, 1);
-            
-
-             for (int h = 0; h < hidden_gradient->row; h++) {
-                hidden_gradient->values[h][0] = output_gradient * 
-                        params->weight[1]->values[0][h] * 
-                        sigmoid_deriv(activations->activ[0])->values[h][0];
+            for (int j = 0; j < params->num_layers; j++) 
+            {
+                
+                update_weights(params->weight[j], g->dw[j], learning_rate);
+                
+                params->bias[j]->values[0][0] -= learning_rate * g->db[j]->values[0][0];
             }
-
-            update_weights(params->weight[0], hidden_gradient, learning_rate);
                       
         }
 
@@ -84,6 +69,8 @@ int main() {
         }
           
     }
+
+    save_weight_bias(params, "weight.csv","bias.csv");
 
     printf("\nRésultats après entraînement :\n");
 
@@ -95,7 +82,7 @@ int main() {
 
         activation* activations = sigmoid(x_sample, params);
 
-        matrix* output = activations->activ[activations->nb_layers - 1];
+        matrix* output = activations->activ[params->num_layers - 1];
 
 
         printf("Entrées : %.1f, %.1f | Sortie calculée : %.2f | Sortie attendue : %.1f\n",

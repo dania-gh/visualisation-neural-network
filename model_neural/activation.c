@@ -76,3 +76,11 @@ double log_loss(double expected, double predicted)
     predicted = fmax(fmin(predicted ,1-epsilon), epsilon);
     return -(expected * log(predicted)+(1-expected)*log(1- predicted));
 }
+
+void update_weights(matrix* weights, matrix* gradient, double learning_rate) {
+    for (int i = 0; i < weights->row; i++) {
+        for (int j = 0; j < weights->col; j++) {
+            weights->values[i][j] -= learning_rate * gradient->values[i][j];
+        }
+    }
+}

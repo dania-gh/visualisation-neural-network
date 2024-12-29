@@ -160,3 +160,17 @@ matrix* transpose(matrix* mat)
     }
     return m;
 }
+
+matrix* sum_row (matrix* m)
+{
+    matrix* mat = createMatrix(m->row,1);
+    matrix_fill(mat,0);
+    for(int i=0 ;i< m->row; i++)
+    {
+        for(int j = 0 ; j< m->col ; j++)
+        {
+            mat->values[i][0]+= m->values[i][j];
+        }
+    }
+    return mat;
+}

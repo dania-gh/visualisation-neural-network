@@ -18,5 +18,6 @@ typedef struct {
 activation* sigmoid (matrix* x, Parameters* p);
 matrix* sigmoid_deriv(matrix* a);
 double log_loss(double expected, double predicted);
+void update_weights(matrix* weights, matrix* gradient, double learning_rate);
 
 #endif
