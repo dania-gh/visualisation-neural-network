@@ -131,6 +131,28 @@ int main(int argc, char* argv[]) {
                 }
             }
 
+            if (layer > 0) {
+                int prev_num_neurons = neurons_per_layer[layer - 1];
+                int x_spacing_prev = (width - 200) / (prev_num_neurons + 1)
+                                for (int prev_neuron = 0; prev_neuron < prev_num_neurons; prev_neuron++) {
+                    int prev_x_pos = 100 + (prev_neuron + 1) * x_spacing_prev;
+                    int prev_y_pos = layer_positions[layer - 1];
+                    for (int neuron = 0; neuron < num_neurons; neuron++) {
+                        int current_x_pos = 100 + (neuron + 1) * x_spacing;
+                        int current_y_pos = layer_positions[layer];
+
+                    
+                        if (layer == 1) {
+                            lineRGBA(renderer, prev_x_pos, prev_y_pos, current_x_pos, current_y_pos, 255, 128, 0, alpha2); // Couleur de la couche 2
+                        } else if (layer == 2) {
+                            lineRGBA(renderer, prev_x_pos, prev_y_pos, current_x_pos, current_y_pos, 0, 128, 255, alpha3); // Couleur de la couche 3
+                        }
+                    }
+                }
+            }
+        }
+
+
 
 
 
