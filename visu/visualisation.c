@@ -27,6 +27,11 @@ void Circle(SDL_Renderer* renderer, int CX, int CY, int rayon) {
     }
 }
 
+void drawLine(SDL_Renderer* renderer, int x, int y, int w, int z) {
+    SDL_RenderDrawLine(renderer, x, y, w, z);
+
+}
+
 int main(int argc, char* argv[]) {
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
         printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
@@ -66,34 +71,30 @@ int main(int argc, char* argv[]) {
     int x_gauche=100;
     for(int i=0; i<1; i++){
         int y_gauche = 200 + i * vertical;
-        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+        SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
 
         Circle(renderer, x_gauche, y_gauche, rayon);
     }
 
-    
+    int x_milieu = 400;
+    for (int i=0; i<3; i++)
+    {
+        int y_milieu = 100 + i * vertical;
+        SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+        Circle(renderer, x_milieu, y_milieu, rayon);
+    }
 
-    int x_droite = 500;
-    for(int i=0; i<num_circles; i++){
+    int x_droite = 700;
+    for(int i=0; i<2; i++){
         int y_droite = 100 + i * vertical;
+        SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
         Circle(renderer, x_droite, y_droite, rayon);
 
     }
         
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+
 
     SDL_RenderPresent(renderer);
-
-    
-
-
-
-   
-
-    
-
-
-
 
     SDL_Event e;
     int quit = 0;
