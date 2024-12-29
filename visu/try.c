@@ -1,3 +1,4 @@
+
 #include <SDL2/SDL.h>
 #include <SDL2/SDL2_gfxPrimitives.h>
 #include <stdio.h>
@@ -11,7 +12,7 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    SDL_Window* window = SDL_CreateWindow("SDL2_gfx Circle", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
+    SDL_Window* window = SDL_CreateWindow("Neural Network Visualisation", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
     if (!window) {
         printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
         SDL_Quit();
@@ -28,38 +29,15 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    SDL_SetRenderDrawColor(renderer, 30, 30, 30, 255);
-    SDL_RenderClear(renderer);
+    int num_layers=3;
+    int neurons_per_layer[]={2,3,1};
+    int layer_positions[]={200,400,600};
+    int r=40;
+
+    int alpha1, alpha2,alpha3,alpha4;
     
-
-    int r = 40;
-    
-    for (int i = 200; i <= 800; i += 200)
-    {
-        for (int j = 200; j <= 800; j += 200) {
-        lineRGBA(renderer, 350, i, 650, j, i, 100, 200, 255);
-    }
-    }
-    for (int i = 200; i <= 800; i += 200) {
-    
-    lineRGBA(renderer, 100, height / 2 - 100, 350, i, 204, 0, 0, 255); 
-    lineRGBA(renderer, 100, height / 2 + 100, 350, i, 255, 128, 0, 255);
-    lineRGBA(renderer, 650, i, 900, height / 2, 0,128,255, 255); 
-
-    
-    filledCircleRGBA(renderer, 350, i, r, i, 100, 200, 255); 
-    filledCircleRGBA(renderer, 650, i, r, 100, 200, i, 255);
-    }
-
-
-    filledCircleRGBA(renderer, 100, height/2-100, r, 204, 0, 0, 255);
-    filledCircleRGBA(renderer, 100, height/2+100, r, 255, 128, 0, 255);
-    filledCircleRGBA(renderer, 900, height/2, r, 0,128,255, 255);
-
-    SDL_RenderPresent(renderer);
-
-    //SDL_Delay(5000);
-
+    Uint32 startTime = SDL_GetTicks();
+    Uint32 duration = 1000;
     SDL_Event e; /*pour garder la fenetre ouverte */
     int quit = 0;
      while (!quit) { 
@@ -68,10 +46,71 @@ int main(int argc, char* argv[]) {
                 quit = 1;  
             }
         }
+
+    Uint32 elapsedTime = SDL_GetTicks() - startTime;
+    if (elapsedTime > 8 * duration ) {
+        startTime = SDL_GetTicks();
+        elapsedTime = 0;
     }
 
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
-    SDL_Quit();
-    return 0;
-}
+    
+    SDL_SetRenderDrawColor(renderer, 30, 30, 30, 255);
+    SDL_RenderClear(renderer);
+    
+    if (SDL_GetTicks() - startTime < duration) {
+            
+            alpha1 = 255; 
+            alpha2 = 70;
+            alpha3 = 70;
+            alpha4 = 70;
+        }
+    else if(SDL_GetTicks() - startTime >= duration && SDL_GetTicks() - startTime < duration + 1000){
+        alpha1 = 70; 
+            alpha2 = 255;
+            alpha3 = 70;
+            alpha4 = 70;
+    }
+    else if(SDL_GetTicks() - startTime >= duration+1000 && SDL_GetTicks() - startTime < duration + 3000){
+        alpha1 = 70; 
+            alpha2 = 70;
+            alpha3 = 255;
+            if( SDL_GetTicks() - startTime > duration + 2000)
+            {
+                alpha3 = 70;
+                alpha4 = 255;
+            }  
+    }else if(SDL_GetTicks() - startTime >= duration+3000 && SDL_GetTicks() - startTime < duration + 4000)
+    {
+        alpha1 = 70; 
+            alpha2 = 70;
+            alpha3 = 255;
+            alpha4=70;
+    }else if(SDL_GetTicks() - startTime >= duration+4000 && SDL_GetTicks() - startTime < duration + 5000)
+    {
+        alpha1 = 70; 
+            alpha2 = 255;
+            alpha3 = 70;
+            alpha4 = 70;
+    }
+    else if (SDL_GetTicks() - startTime >= duration+5000 && SDL_GetTicks() - startTime < duration + 6000){
+        alpha1 = 255; 
+            alpha2 = 70;
+            alpha3 = 70;
+            alpha4 = 70;
+    }
+    else{
+        alpha1 = 70; 
+            alpha2 = 70;
+            alpha3 = 70;
+            alpha4 = 70;
+    }
+
+    for (int layer = 0; layer < num_layers; layer++) {
+            int num_neurons = neurons_per_layer[layer];
+            int x_spacing = (width - 200) / (num_neurons + 1);
+    }
+
+
+
+
+   
