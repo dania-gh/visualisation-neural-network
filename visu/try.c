@@ -28,38 +28,10 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    SDL_SetRenderDrawColor(renderer, 30, 30, 30, 255);
-    SDL_RenderClear(renderer);
+    int alpha1, alpha2,alpha3,alpha4;
     
-
-    int r = 40;
-    
-    for (int i = 200; i <= 800; i += 200)
-    {
-        for (int j = 200; j <= 800; j += 200) {
-        lineRGBA(renderer, 350, i, 650, j, i, 100, 200, 255);
-    }
-    }
-    for (int i = 200; i <= 800; i += 200) {
-    
-    lineRGBA(renderer, 100, height / 2 - 100, 350, i, 204, 0, 0, 255); 
-    lineRGBA(renderer, 100, height / 2 + 100, 350, i, 255, 128, 0, 255);
-    lineRGBA(renderer, 650, i, 900, height / 2, 0,128,255, 255); 
-
-    
-    filledCircleRGBA(renderer, 350, i, r, i, 100, 200, 255); 
-    filledCircleRGBA(renderer, 650, i, r, 100, 200, i, 255);
-    }
-
-
-    filledCircleRGBA(renderer, 100, height/2-100, r, 204, 0, 0, 255);
-    filledCircleRGBA(renderer, 100, height/2+100, r, 255, 128, 0, 255);
-    filledCircleRGBA(renderer, 900, height/2, r, 0,128,255, 255);
-
-    SDL_RenderPresent(renderer);
-
-    //SDL_Delay(5000);
-
+    Uint32 startTime = SDL_GetTicks();
+    Uint32 duration = 1000;
     SDL_Event e; /*pour garder la fenetre ouverte */
     int quit = 0;
      while (!quit) { 
@@ -68,6 +40,74 @@ int main(int argc, char* argv[]) {
                 quit = 1;  
             }
         }
+
+    Uint32 elapsedTime = SDL_GetTicks() - startTime;
+    if (elapsedTime > 4 * duration) {
+        startTime = SDL_GetTicks();
+        elapsedTime = 0;
+    }
+
+    
+    SDL_SetRenderDrawColor(renderer, 30, 30, 30, 255);
+    SDL_RenderClear(renderer);
+    
+    if (SDL_GetTicks() - startTime < duration) {
+            
+            alpha1 = 255; 
+            alpha2 = 70;
+            alpha3 = 70;
+            alpha4 = 70;
+        }
+    else if(SDL_GetTicks() - startTime >= duration && SDL_GetTicks() - startTime < duration + 1000){
+        alpha1 = 70; 
+            alpha2 = 255;
+            alpha3 = 70;
+            alpha4 = 70;
+    }
+    else{
+        alpha1 = 70; 
+            alpha2 = 70;
+            alpha3 = 255;
+            if( SDL_GetTicks() - startTime > duration + 2000)
+            {
+                alpha3 = 70;
+                alpha4 = 255;
+            }
+            
+    }
+    int r = 40;
+    
+    for (int i = 200; i <= 800; i += 200)
+    {
+        for (int j = 200; j <= 800; j += 200) {
+        lineRGBA(renderer, 350, i, 650, j, i, 100, 200, alpha2);
+    }
+    }
+    for (int i = 200; i <= 800; i += 200) {
+    
+    lineRGBA(renderer, 100, height / 2 - 100, 350, i, 204, 0, 0, alpha1); 
+    lineRGBA(renderer, 100, height / 2 + 100, 350, i, 255, 128, 0, alpha1);
+    lineRGBA(renderer, 650, i, 900, height / 2, 0,128,255, alpha3); 
+
+    
+    filledCircleRGBA(renderer, 350, i, r, i, 100, 200, alpha2); 
+    filledCircleRGBA(renderer, 650, i, r, 100, 200, i, alpha3);
+    }
+
+
+    filledCircleRGBA(renderer, 100, height/2-100, r, 204, 0, 0, alpha1);
+    filledCircleRGBA(renderer, 100, height/2+100, r, 255, 128, 0, alpha1);
+    filledCircleRGBA(renderer, 900, height/2, r, 0,128,255, alpha4);
+
+
+
+    
+
+    SDL_RenderPresent(renderer);
+
+    //SDL_Delay(5000);
+
+    
     }
 
     SDL_DestroyRenderer(renderer);
