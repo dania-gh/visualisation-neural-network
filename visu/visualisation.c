@@ -1,7 +1,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL2_gfxPrimitives.h>
 #include <stdio.h>
-#include <math.h> // Pour sin()
+#include <math.h>
 
 int width = 1000;
 int height = 1000;
@@ -28,18 +28,17 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    // Paramètres du réseau
-    int num_layers = 5;                              // Nombre total de couches
-    int neurons_per_layer[] = {1, 5, 2, 2, 2};       // Nombre de neurones par couche
-    int layer_positions[] = {200, 300, 400, 500, 600}; // Positions Y des couches
-    int r = 40;                                      // Rayon des neurones
-    Uint32 duration_per_layer = 1000;                // Durée d'activation par couche (en ms)
-    Uint32 startTime = SDL_GetTicks();               // Temps de départ de l'animation
+    int num_layers = 5;
+    int neurons_per_layer[] = {1, 5, 2, 2, 2};
+    int layer_positions[] = {200, 300, 400, 500, 600};
+    int r = 40;
+    Uint32 duration_per_layer = 1000;
+    Uint32 startTime = SDL_GetTicks();
     SDL_Event e;
     int quit = 0;
 
-    int direction = 1; // Direction de l'animation : 1 = avancer, -1 = reculer
-    int activeLayer = 0; // Couche active initiale
+    int direction = 1;
+    int activeLayer = 0;
 
     while (!quit) {
         while (SDL_PollEvent(&e) != 0) {
@@ -48,38 +47,33 @@ int main(int argc, char* argv[]) {
             }
         }
 
-        Uint32 elapsedTime = SDL_GetTicks() - startTime; // Temps écoulé depuis le début
+        Uint32 elapsedTime = SDL_GetTicks() - startTime;
         if (elapsedTime >= duration_per_layer) {
-            startTime = SDL_GetTicks(); // Réinitialise le temps de départ
-
-            // Change la couche active en fonction de la direction
+            startTime = SDL_GetTicks();
             activeLayer += direction;
             if (activeLayer == num_layers - 1 || activeLayer == 0) {
-                direction *= -1; // Inverse la direction à chaque extrémité
+                direction *= -1;
             }
         }
 
-        float layerProgress = (float)(elapsedTime % duration_per_layer) / duration_per_layer; // Progression dans l'animation
+        float layerProgress = (float)(elapsedTime % duration_per_layer) / duration_per_layer;
 
-        SDL_SetRenderDrawColor(renderer, 30, 30, 30, 255); // Efface l'écran avec une couleur sombre
+        SDL_SetRenderDrawColor(renderer, 30, 30, 30, 255);
         SDL_RenderClear(renderer);
 
         for (int layer = 0; layer < num_layers; layer++) {
             int num_neurons = neurons_per_layer[layer];
-            int x_spacing = (width - 200) / (num_neurons + 1); // Espacement des neurones dans chaque couche
+            int y_spacing = (height - 200) / (num_neurons + 1);
 
-            // Détermine l'alpha (transparence) pour chaque couche
-            int alpha = 70; // Par défaut, faible transparence
+            int alpha = 70;
             if (layer == activeLayer) {
-                alpha = 70 + (int)(185 * fabs(sin(M_PI * layerProgress))); // Transition fluide (sinus)
+                alpha = 70 + (int)(185 * fabs(sin(M_PI * layerProgress)));
             }
 
-            // Dessine les neurones
             for (int neuron = 0; neuron < num_neurons; neuron++) {
-                int x_pos = 100 + (neuron + 1) * x_spacing;
-                int y_pos = layer_positions[layer];
+                int y_pos = 100 + (neuron + 1) * y_spacing;
+                int x_pos = layer_positions[layer];
 
-                // Couleur par couche
                 int r_color, g_color, b_color;
                 if (layer == 0) {
                     r_color = 204; g_color = 0; b_color = 0;
@@ -95,23 +89,21 @@ int main(int argc, char* argv[]) {
 
                 filledCircleRGBA(renderer, x_pos, y_pos, r, r_color, g_color, b_color, alpha);
 
-                // Dessine les connexions entre les couches
                 if (layer > 0) {
                     int prev_num_neurons = neurons_per_layer[layer - 1];
-                    int x_spacing_prev = (width - 200) / (prev_num_neurons + 1);
+                    int y_spacing_prev = (height - 200) / (prev_num_neurons + 1);
 
                     for (int prev_neuron = 0; prev_neuron < prev_num_neurons; prev_neuron++) {
-                        int prev_x_pos = 100 + (prev_neuron + 1) * x_spacing_prev;
-                        int prev_y_pos = layer_positions[layer - 1];
+                        int prev_x_pos = layer_positions[layer - 1];
+                        int prev_y_pos = 100 + (prev_neuron + 1) * y_spacing_prev;
 
-                        // Utilise la couleur du cercle actuel pour la ligne
                         lineRGBA(renderer, prev_x_pos, prev_y_pos, x_pos, y_pos, r_color, g_color, b_color, alpha);
                     }
                 }
             }
         }
 
-        SDL_RenderPresent(renderer); // Rafraîchit l'écran
+        SDL_RenderPresent(renderer);
     }
 
     SDL_DestroyRenderer(renderer);
@@ -119,4 +111,3 @@ int main(int argc, char* argv[]) {
     SDL_Quit();
     return 0;
 }
-
