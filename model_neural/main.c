@@ -53,7 +53,7 @@ void normalize_all_columns(matrix* m) {
 }
 
 const double learning_rate = 0.01;
-const int epochs = 5000;
+const int epochs = 10000;
 Parameters* params;
 
 
@@ -61,8 +61,8 @@ Parameters* params;
 int main() {
     srand(time(NULL));
 
-    matrix* X = createMatrix(767, 8);
-    matrix* Y = createMatrix(767, 1);
+    matrix* X = createMatrix(500, 8);
+    matrix* Y = createMatrix(500, 1);
     creat_X_Y(X, Y);
 
     normalize_all_columns(X);
@@ -78,7 +78,7 @@ int main() {
 
         
 
-        for (int i = 0; i < 767; i++) {
+        for (int i = 0; i < 500; i++) {
 
 
             matrix* x_sample=createMatrix(8,1);
@@ -119,7 +119,7 @@ int main() {
         }
 
         
-        if (epoch % 100 == 0) 
+        if (epoch % 1000 == 0) 
         {
             printf("Epoch %d, Log Loss moyen : %.4f\n", epoch, total_log_loss / 100);
         }
@@ -131,7 +131,7 @@ int main() {
 
     printf("\nRésultats après entraînement :\n");
 
-    for (int i = 0; i < 767; i++) {
+    for (int i = 0; i < 500; i++) {
         
         matrix* x_sample = createMatrix(8, 1);
         x_sample->values[0][0]=X->values[i][0];
