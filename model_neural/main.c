@@ -10,7 +10,7 @@
 
 const double learning_rate = 0.1;
 const int epochs = 10000;
-
+Parameters* params;
 
 
 
@@ -21,11 +21,8 @@ int main() {
     matrix* Y = createMatrix(100, 1);
     creat_X_Y(X, Y);
 
-    Parameters* params = initialisation(2, 1, 4, 2);
+    params = initialisation(2, 1, 4, 3);
 
-    
-
-    
 
     for (int epoch = 0; epoch < epochs; epoch++) 
     {
