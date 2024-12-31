@@ -68,7 +68,7 @@ int main() {
     normalize_all_columns(X);
 
 
-    params = initialisation(8, 1, 10,3, 5);
+    params = initialisation(8, 1, 10, 5);
 
 
     for (int epoch = 0; epoch < epochs; epoch++) 
