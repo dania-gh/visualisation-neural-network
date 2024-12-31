@@ -17,8 +17,8 @@ Parameters* params;
 int main() {
     srand(time(NULL));
 
-    matrix* X = createMatrix(100, 2);
-    matrix* Y = createMatrix(100, 1);
+    matrix* X = createMatrix(767, 8);
+    matrix* Y = createMatrix(767, 1);
     creat_X_Y(X, Y);
 
     params = initialisation(2, 1, 4, 3);
@@ -31,12 +31,18 @@ int main() {
 
         
 
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 767; i++) {
 
 
-            matrix* x_sample=createMatrix(2,1);
+            matrix* x_sample=createMatrix(8,1);
             x_sample->values[0][0]=X->values[i][0];
             x_sample->values[1][0]=X->values[i][1];
+            x_sample->values[2][0]=X->values[i][2];
+            x_sample->values[3][0]=X->values[i][3];
+            x_sample->values[4][0]=X->values[i][4];
+            x_sample->values[5][0]=X->values[i][5];
+            x_sample->values[6][0]=X->values[i][6];
+            x_sample->values[7][0]=X->values[i][7];
 
            
 
@@ -71,11 +77,17 @@ int main() {
 
     printf("\nRésultats après entraînement :\n");
 
-    for (int i = 0; i < 100; i++) {
+    for (int i = 0; i < 767; i++) {
         
-        matrix* x_sample = createMatrix(2, 1);
-        x_sample->values[0][0] = X->values[i][0];
-        x_sample->values[1][0] = X->values[i][1];
+        matrix* x_sample = createMatrix(8, 1);
+        x_sample->values[0][0]=X->values[i][0];
+        x_sample->values[1][0]=X->values[i][1];
+        x_sample->values[2][0]=X->values[i][2];
+        x_sample->values[3][0]=X->values[i][3];
+        x_sample->values[4][0]=X->values[i][4];
+        x_sample->values[5][0]=X->values[i][5];
+        x_sample->values[6][0]=X->values[i][6];
+        x_sample->values[7][0]=X->values[i][7];
 
         activation* activations = sigmoid(x_sample, params);
 
