@@ -26,6 +26,32 @@ void freeGradient(gradient* g) {
 }
 
 
+void normalize_column(matrix* m, int col_index) {
+    double min_value = m->values[0][col_index];
+    double max_value = m->values[0][col_index];
+
+    
+    for (int i = 1; i < m->row; i++) {
+        if (m->values[i][col_index] < min_value) {
+            min_value = m->values[i][col_index];
+        }
+        if (m->values[i][col_index] > max_value) {
+            max_value = m->values[i][col_index];
+        }
+    }
+
+   
+    for (int i = 0; i < m->row; i++) {
+        m->values[i][col_index] = (m->values[i][col_index] - min_value) / (max_value - min_value);
+    }
+}
+
+void normalize_all_columns(matrix* m) {
+    for (int j = 0; j < m->col; j++) {
+        normalize_column(m, j);
+    }
+}
+
 const double learning_rate = 0.01;
 const int epochs = 5000;
 Parameters* params;
@@ -38,6 +64,9 @@ int main() {
     matrix* X = createMatrix(767, 8);
     matrix* Y = createMatrix(767, 1);
     creat_X_Y(X, Y);
+
+    normalize_all_columns(X);
+
 
     params = initialisation(8, 1, 10,3, 5);
 
