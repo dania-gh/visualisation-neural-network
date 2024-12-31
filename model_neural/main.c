@@ -7,9 +7,27 @@
 #include "activation.h"
 #include "back_propagation.h"
 #include "save.h"
+void freeActivations(activation* activations) {
+    for (int i = 0; i < activations->nb_layers; i++) {
+        freeMatrix(activations->activ[i]);
+    }
+    free(activations->activ);  
+    free(activations);         
+}
 
-const double learning_rate = 0.1;
-const int epochs = 500;
+void freeGradient(gradient* g) {
+    for (int i = 0; i < g->nb_layers; i++) {
+        freeMatrix(g->dw[i]);
+        freeMatrix(g->db[i]);
+    }
+    free(g->dw);  
+    free(g->db);  
+    free(g);      
+}
+
+
+const double learning_rate = 0.001;
+const int epochs = 5000;
 Parameters* params;
 
 
@@ -64,11 +82,15 @@ int main() {
                 
                 params->bias[j]->values[0][0] -= learning_rate * g->db[j]->values[0][0];
             }
+            freeMatrix(x_sample);
+            freeMatrix(y_sample);
+            freeActivations(activations);
+            freeGradient(g);
                       
         }
 
         
-        if (epoch % 10 == 0) 
+        if (epoch % 100 == 0) 
         {
             printf("Epoch %d, Log Loss moyen : %.4f\n", epoch, total_log_loss / 100);
         }
