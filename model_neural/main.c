@@ -9,7 +9,7 @@
 #include "save.h"
 
 const double learning_rate = 0.1;
-const int epochs = 10000;
+const int epochs = 500;
 Parameters* params;
 
 
@@ -21,7 +21,7 @@ int main() {
     matrix* Y = createMatrix(767, 1);
     creat_X_Y(X, Y);
 
-    params = initialisation(2, 1, 4, 3);
+    params = initialisation(8, 1, 10, 4);
 
 
     for (int epoch = 0; epoch < epochs; epoch++) 
@@ -67,9 +67,12 @@ int main() {
                       
         }
 
-        if (epoch % 1000 == 0) {
+        
+        if (epoch % 10 == 0) 
+        {
             printf("Epoch %d, Log Loss moyen : %.4f\n", epoch, total_log_loss / 100);
         }
+        
           
     }
 
@@ -94,8 +97,10 @@ int main() {
         matrix* output = activations->activ[params->num_layers - 1];
 
 
-        printf("Entrées : %.1f, %.1f | Sortie calculée : %.2f | Sortie attendue : %.1f\n",
+        if (i % 10 == 0) {
+           printf("Entrées : %.1f, %.1f | Sortie calculée : %.2f | Sortie attendue : %.1f\n",
             X->values[i][0], X->values[i][1], output->values[0][0], Y->values[i][0]);
+        }
 
     }
 
