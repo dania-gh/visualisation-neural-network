@@ -26,7 +26,7 @@ void freeGradient(gradient* g) {
 }
 
 
-const double learning_rate = 0.001;
+const double learning_rate = 0.01;
 const int epochs = 5000;
 Parameters* params;
 
@@ -39,7 +39,7 @@ int main() {
     matrix* Y = createMatrix(767, 1);
     creat_X_Y(X, Y);
 
-    params = initialisation(8, 1, 10, 4);
+    params = initialisation(8, 1, 10,3, 5);
 
 
     for (int epoch = 0; epoch < epochs; epoch++) 
