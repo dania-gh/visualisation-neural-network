@@ -101,14 +101,14 @@ int r =25;
 Uint32 startTime2 = SDL_GetTicks();
 SDL_Event e; /*pour garder la fenetre ouverte */
 int quit = 0;
-while (!quit && SDL_GetTicks()<= startTime2+6000 ) { 
+while (!quit && SDL_GetTicks()<= startTime2+9500 ) { 
 while (SDL_PollEvent(&e) != 0) { 
 if (e.type == SDL_QUIT) {   
 quit = 1;  
 }
 }
-    
     neuralNetwork(renderer, r,1000,255);
+    neuralNetwork(renderer, r,1000,150);
 
     SDL_Color textColor = {255, 255, 255, 255};//set color of text
     SDL_Texture* textTexture;
@@ -142,7 +142,7 @@ quit = 1;
         
     }
 
-    neuralNetwork(renderer, r,1000,255);
+    neuralNetwork(renderer, r,1000,150);
 
     startTime1 = SDL_GetTicks();
     while(SDL_GetTicks() < startTime1+1500)//to print y for 2000ms
@@ -160,8 +160,20 @@ quit = 1;
     }
 
     neuralNetwork(renderer, r,1000,150);
-    
 
+    startTime1 = SDL_GetTicks();
+    while(SDL_GetTicks() < startTime1+1500)//to make hidden layer node bigger
+    { 
+        for (int i = 100; i <= 880; i += 80) {
+
+        filledCircleRGBA(renderer, 600, i, r+10, i, 100, 200, 255); //first layer
+        filledCircleRGBA(renderer, 900, i, r+10, 100, 200, i, 255);//second layer
+        filledCircleRGBA(renderer, 1200, i, r+10, 100,i, 200, 255);//third layer
+        }
+        SDL_RenderPresent(renderer);
+    }
+
+    neuralNetwork(renderer, r,1000,255);
 
     SDL_DestroyTexture(textTexture);
     TTF_CloseFont(font);
