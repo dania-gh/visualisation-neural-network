@@ -103,34 +103,39 @@ alpha4 = 70;
 
 int r =25;
 
-for (int i = 200; i <= 800; i += 200)
+for (int i = 100; i <= 880; i += 80)
 {
-for (int j = 200; j <= 800; j += 200) {
-lineRGBA(renderer, 350, i, 650, j, i, 100, 200, alpha2);
+for (int j = 100; j <= 880; j += 80) {
+lineRGBA(renderer, 600, i, 900, j, i, 100, 200, alpha2); //line between fist and second
+lineRGBA(renderer, 900, i, 1200, j, 100, 200, i, alpha3);//line between second and third
 }
 }
 for (int i = 100; i <= 880; i += 80) {
-
-lineRGBA(renderer, 100, height / 2 - 100, 350, i, 204, 0, 0, alpha1); 
-lineRGBA(renderer, 100, height / 2 + 100, 350, i, 255, 128, 0, alpha1);
-lineRGBA(renderer, 650, i, 900, height / 2, 0,128,255, alpha3); 
-
-filledCircleRGBA(renderer, 600, i, r, 30, 30, 30, 255); //first layer
-filledCircleRGBA(renderer, 900, i, r, 30, 30, 30, 255);//second layer
-filledCircleRGBA(renderer, 1200, i, r, 30, 30, 30, 255);//third layer
-
-
-filledCircleRGBA(renderer, 600, i, r, i, 100, 200, alpha2); 
-filledCircleRGBA(renderer, 900, i, r, 100, 200, i, alpha3);
-filledCircleRGBA(renderer, 1200, i, r, 100,i, 200, 255);
+for(int j = 200 ; j<=800;j+=80)
+{
+    lineRGBA(renderer, 300, j, 600, i, 204, 0, 0, alpha1);
 }
-for(int i = 200 ; i<=800;i+=80 ){
+
+
+
+lineRGBA(renderer, 1200, i, 1500, height / 2, 0,128,255, alpha3); 
+
+filledCircleRGBA(renderer, 600, i, r, 30, 30, 30, 255); //first layer background
+filledCircleRGBA(renderer, 900, i, r, 30, 30, 30, 255);//second layer background
+filledCircleRGBA(renderer, 1200, i, r, 30, 30, 30, 255);//third layer background
+
+
+filledCircleRGBA(renderer, 600, i, r, i, 100, 200, alpha2); //first layer
+filledCircleRGBA(renderer, 900, i, r, 100, 200, i, alpha3);//second layer
+filledCircleRGBA(renderer, 1200, i, r, 100,i, 200, 255);//third layer
+}
+for(int i = 200 ; i<=800;i+=80 ){ //input node
     filledCircleRGBA(renderer, 300, i, r, 30, 30, 30, 255);
     filledCircleRGBA(renderer, 300,i, r, 204, 0, 0, alpha1);
 }
 
 
-//output
+//output node
 filledCircleRGBA(renderer, 1500, height/2, r, 30, 30, 30, 255);
 filledCircleRGBA(renderer, 1500, height/2, r, 0,128,255, alpha4);
 
