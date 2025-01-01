@@ -112,7 +112,9 @@ quit = 1;
     {
         SDL_Color textColor = {255, 255, 255, 255};
         
-
+        int j = 1;
+        char str1[] = "x";
+        char str2[50];
         
 
 
@@ -120,11 +122,19 @@ quit = 1;
         filledCircleRGBA(renderer, 300, i, r+10, 30, 30, 30, 255);
         filledCircleRGBA(renderer, 300,i, r+10, 204, 0, 0, 255);
 
-        SDL_Surface* textSurface = TTF_RenderText_Solid(font, "x", textColor);
+        // concatinate 2 string#
+        sprintf(str2, "%d", j);
+        char finalStr[100]; 
+        strcpy(finalStr, str1); 
+        strcat(finalStr, str2);
+
+        // display x on node
+        SDL_Surface* textSurface = TTF_RenderText_Solid(font, finalStr, textColor);
         SDL_Texture* textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
         SDL_FreeSurface(textSurface);
-        SDL_Rect textRect = {290, i-10, 20, 20};
+        SDL_Rect textRect = {290, i-10, 30, 30};
         SDL_RenderCopy(renderer, textTexture, NULL, &textRect);
+        j++;
         }
         SDL_RenderPresent(renderer);
     }
