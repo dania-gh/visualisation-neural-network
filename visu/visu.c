@@ -158,9 +158,61 @@ int r =25;
     neuralNetwork(renderer, r,1000,150);
 
     startTime1 = SDL_GetTicks();
-    while(SDL_GetTicks() < startTime1+1500)//to print y for 2000ms
+    while(SDL_GetTicks() < startTime1+4000)//segmoid zoomed
     {   
+        SDL_SetRenderDrawColor(renderer, 30, 30, 30, 255);
+        SDL_RenderClear(renderer);
+
+        lineRGBA(renderer, 600,300, 1400,500,100, 200, 100, 255);//input 1 line
+        lineRGBA(renderer, 600,700, 1400,500, 100, 200, 100, 255);// input 2 line
+
+        filledCircleRGBA(renderer, 600,300, r*4, 204, 0, 0, 255);//input 1
+        filledCircleRGBA(renderer, 600,700, r*4, 204, 0, 0, 255);// input 2
+        filledCircleRGBA(renderer, 1400,500, r*7, 200, 100, 200, 255);// 3th node
+
+        textSurface = TTF_RenderText_Solid(font, "Forword propagation", textColor);
+        textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
+        SDL_FreeSurface(textSurface);
+        SDL_Rect textRect = {20, 20, 300, 100};//{x,y,w,h}
+        SDL_RenderCopy(renderer, textTexture, NULL, &textRect);
+
+        textSurface = TTF_RenderText_Solid(font, "X1", textColor);//write x1 in node 1
+        textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
+        SDL_FreeSurface(textSurface);
+        SDL_Rect textRect1 = {600-20,300-20, 70, 40};
+        SDL_RenderCopy(renderer, textTexture, NULL, &textRect1);
         
+
+        textSurface = TTF_RenderText_Solid(font, "X2", textColor);//write x2 in node 2
+        textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
+        SDL_FreeSurface(textSurface);
+        SDL_Rect textRect2 = {600-20,700-20, 70, 40};
+        SDL_RenderCopy(renderer, textTexture, NULL, &textRect2);
+
+        textSurface = TTF_RenderText_Solid(font, "w1", textColor);//write w1 in line 1
+        textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
+        SDL_FreeSurface(textSurface);
+        SDL_Rect textRect4 = {1000,350, 70, 40};
+        SDL_RenderCopy(renderer, textTexture, NULL, &textRect4);
+
+        textSurface = TTF_RenderText_Solid(font, "w2", textColor);//write w2 in line 2
+        textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
+        SDL_FreeSurface(textSurface);
+        SDL_Rect textRect3 = {1000,600, 70, 40};
+        SDL_RenderCopy(renderer, textTexture, NULL, &textRect3);
+
+        textSurface = TTF_RenderText_Solid(font, "x1*w1 + x2*w2 + bias", textColor);//write x1*w1 + x2*w2 + bias
+        textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
+        SDL_FreeSurface(textSurface);
+        textRect3.x = 1260;
+        textRect3.y = 470;
+        textRect3.w = 300;
+        textRect3.h = 60;
+        SDL_RenderCopy(renderer, textTexture, NULL, &textRect3);
+        
+        
+
+        SDL_RenderPresent(renderer);
     }
 
 
@@ -180,7 +232,7 @@ int r =25;
         SDL_RenderPresent(renderer);
     }*/
 
-    neuralNetwork(renderer, r,1000,255);
+    //neuralNetwork(renderer, r,1000,255);
 
    
 
@@ -325,7 +377,7 @@ SDL_RenderPresent(renderer);
 
 
 }
- SDL_DestroyTexture(textTexture);
+SDL_DestroyTexture(textTexture);
 TTF_CloseFont(font);
 TTF_Quit();
 SDL_DestroyRenderer(renderer);
