@@ -1,6 +1,6 @@
 #include "save.h"
 
-void save_data(Parameters* params, const char* fichier_poids, const char* fichier_bias)
+void save_weight_bias(Parameters* params, const char* fichier_poids, const char* fichier_bias)
 {
    
     FILE* f_poids = fopen(fichier_poids, "w");
@@ -49,4 +49,25 @@ void save_data(Parameters* params, const char* fichier_poids, const char* fichie
     }
 
     fclose(f_bias);
+}
+
+void save_data(const char *filename, matrix *mat) {
+    FILE *file = fopen(filename, "w");
+    if (file == NULL) {
+        printf("Erreur : Impossible d'ouvrir le fichier %s\n", filename);
+        return;
+    }
+
+    for (int i = 0; i < mat->row; i++) {
+        for (int j = 0; j < mat->col; j++) {
+            fprintf(file, "%f", mat->values[i][j]);
+            if (j < mat->col - 1) {
+                fprintf(file, ","); 
+            }
+        }
+        fprintf(file, "\n"); 
+    }
+
+    fclose(file);
+    printf("Matrice enregistrée dans %s avec succès.\n", filename);
 }

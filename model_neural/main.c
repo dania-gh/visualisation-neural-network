@@ -65,8 +65,10 @@ int main() {
     matrix* Y = createMatrix(500, 1);
     creat_X_Y(X, Y);
 
-    normalize_all_columns(X);
 
+    normalize_all_columns(X);
+    save_data("input_normalise.csv", X);
+    
 
 
     params = initialisation(8, 1, 10, 6);
