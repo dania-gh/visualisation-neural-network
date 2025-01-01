@@ -1,6 +1,6 @@
 #include "save.h"
 
-void save_weight_bias(Parameters* params, const char* fichier_poids, const char* fichier_bias)
+void save_data(Parameters* params, const char* fichier_poids, const char* fichier_bias)
 {
    
     FILE* f_poids = fopen(fichier_poids, "w");
