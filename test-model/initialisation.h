@@ -11,6 +11,6 @@ typedef struct {
     int num_layers;  
 } Parameters;
 
-Parameters* initialisation(int nb_x,int nb_y, int nb_node, int nb_layers);
+Parameters* initialisation(int nb_x, int nb_y, int nb_node,int nb_layers);
 
 #endif

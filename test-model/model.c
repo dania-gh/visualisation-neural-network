@@ -15,13 +15,20 @@ matrix* predict(matrix* x_sample, Parameters* params) {
 int main ()
 {
     
-    Parameters* params = initialisation(2, 1, 4, 2);
+    Parameters* params = initialisation(8, 1, 10, 5);
 
     load_weight_bias(params, "../model_neural/weight.csv", "../model_neural/bias.csv");
 
-    matrix* nouvelle_entree = createMatrix(2, 1);
-    nouvelle_entree->values[0][0] = 0.63; 
-    nouvelle_entree->values[1][0] = 4.46; 
+    matrix* nouvelle_entree = createMatrix(8, 1);
+    nouvelle_entree->values[0][0] = 1; 
+    nouvelle_entree->values[1][0] = 103; 
+    nouvelle_entree->values[2][0] = 30;
+    nouvelle_entree->values[3][0] = 38;
+    nouvelle_entree->values[4][0] = 83;
+    nouvelle_entree->values[5][0] = 43.3;
+    nouvelle_entree->values[6][0] = 0.183;
+    nouvelle_entree->values[7][0] = 33;
+
 
     matrix* sortie = predict(nouvelle_entree, params);
 
@@ -29,9 +36,9 @@ int main ()
         nouvelle_entree->values[0][0], nouvelle_entree->values[1][0], sortie->values[0][0]);
 
     if (sortie->values[0][0] > 0.5) {
-        printf("La plante est toxique.\n");
+        printf("Cette femme est  diabétique.\n");
     } else {
-        printf("La plante n'est pas toxique.\n");
+        printf("Cette femme n'est pas diabétique.\n");
     }
 
     return 0;

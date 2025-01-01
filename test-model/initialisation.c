@@ -1,6 +1,6 @@
 #include "initialisation.h"
 
-Parameters* initialisation(int nb_x, int nb_y, int nb_node, int nb_layers) {
+Parameters* initialisation(int nb_x, int nb_y, int nb_node,int nb_layers) {
     Parameters* p = (Parameters*)malloc(sizeof(Parameters));
 
     if (p == NULL) {
@@ -23,15 +23,15 @@ Parameters* initialisation(int nb_x, int nb_y, int nb_node, int nb_layers) {
             p->weight[i] = createMatrix(nb_node, nb_x);
         } else if (i == nb_layers - 1) {
             p->weight[i] = createMatrix(nb_y, nb_node);
-        } else {
+        }else {
             p->weight[i] = createMatrix(nb_node, nb_node);
         }
 
-        matrix_randomize(p->weight[i], nb_node);
+        matrix_randomize(p->weight[i], p->weight[i]->row);
 
         if (i == nb_layers - 1) {
             p->bias[i] = createMatrix(nb_y, 1);
-        } else {
+        }else {
             p->bias[i] = createMatrix(nb_node, 1);
         }
 
