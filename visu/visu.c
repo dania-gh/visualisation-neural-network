@@ -96,6 +96,9 @@ TTF_Font* font = TTF_OpenFont("font1.ttf", 24);
         SDL_Quit();
         return 1;
     }
+SDL_Color textColor = {255, 255, 255, 255};//set color of text
+SDL_Texture* textTexture;
+SDL_Surface* textSurface;
 
 int r =25;
 Uint32 startTime2 = SDL_GetTicks();
@@ -110,8 +113,7 @@ quit = 1;
     neuralNetwork(renderer, r,1000,255);
     neuralNetwork(renderer, r,1000,150);
 
-    SDL_Color textColor = {255, 255, 255, 255};//set color of text
-    SDL_Texture* textTexture;
+    
 
     Uint32 startTime1 = SDL_GetTicks();
     while(SDL_GetTicks() < startTime1+1500)//to print x for 2000ms
@@ -131,7 +133,7 @@ quit = 1;
         strcat(finalStr, str2);
 
         // display x on node
-        SDL_Surface* textSurface = TTF_RenderText_Solid(font, finalStr, textColor);
+        textSurface = TTF_RenderText_Solid(font, finalStr, textColor);
         textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
         SDL_FreeSurface(textSurface);
         SDL_Rect textRect = {290, i-10, 30, 30};//{x,y,w,h}
@@ -151,7 +153,7 @@ quit = 1;
         filledCircleRGBA(renderer, 1500, height/2, r+10, 0,128,255, 255);// drow y node bigger
 
         //display Y test
-        SDL_Surface* textSurface = TTF_RenderText_Solid(font, "Y", textColor);
+        textSurface = TTF_RenderText_Solid(font, "Y", textColor);
         textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
         SDL_FreeSurface(textSurface);
         SDL_Rect textRect = {1500-10, height/2-10, 30, 30};
@@ -162,22 +164,31 @@ quit = 1;
     neuralNetwork(renderer, r,1000,150);
 
     startTime1 = SDL_GetTicks();
+    while(SDL_GetTicks() < startTime1+1500)//to print y for 2000ms
+    {   
+        
+    }
+
+
+      
+
+    /*startTime1 = SDL_GetTicks();
     while(SDL_GetTicks() < startTime1+1500)//to make hidden layer node bigger
     { 
         for (int i = 100; i <= 880; i += 80) {
-
+        
         filledCircleRGBA(renderer, 600, i, r+10, i, 100, 200, 255); //first layer
         filledCircleRGBA(renderer, 900, i, r+10, 100, 200, i, 255);//second layer
         filledCircleRGBA(renderer, 1200, i, r+10, 100,i, 200, 255);//third layer
+
+        
         }
         SDL_RenderPresent(renderer);
-    }
+    }*/
 
     neuralNetwork(renderer, r,1000,255);
 
-    SDL_DestroyTexture(textTexture);
-    TTF_CloseFont(font);
-    TTF_Quit();
+   
 }
 
 int alpha1, alpha2,alpha3,alpha4,alpha5;
@@ -300,7 +311,15 @@ filledCircleRGBA(renderer, 1500, height/2, r, 30, 30, 30, 255);
 filledCircleRGBA(renderer, 1500, height/2, r, 0,128,255, alpha5);
 
 
-
+if(SDL_GetTicks() - startTime < duration + 3000){
+    textSurface = TTF_RenderText_Solid(font, "Forword propagation", textColor);
+}else {
+    textSurface = TTF_RenderText_Solid(font, "Back propagation", textColor);
+}
+textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
+SDL_FreeSurface(textSurface);
+SDL_Rect textRect = {20, 20, 300, 100};//{x,y,w,h}
+SDL_RenderCopy(renderer, textTexture, NULL, &textRect);
 
 
 SDL_RenderPresent(renderer);
@@ -309,7 +328,9 @@ SDL_RenderPresent(renderer);
 
 
 }
-
+ SDL_DestroyTexture(textTexture);
+TTF_CloseFont(font);
+TTF_Quit();
 SDL_DestroyRenderer(renderer);
 SDL_DestroyWindow(window);
 SDL_Quit();
