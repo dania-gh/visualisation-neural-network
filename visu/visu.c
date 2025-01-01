@@ -101,15 +101,9 @@ SDL_Texture* textTexture;
 SDL_Surface* textSurface;
 
 int r =25;
-Uint32 startTime2 = SDL_GetTicks();
-SDL_Event e; /*pour garder la fenetre ouverte */
-int quit = 0;
-while (!quit && SDL_GetTicks()<= startTime2+9500 ) { 
-while (SDL_PollEvent(&e) != 0) { 
-if (e.type == SDL_QUIT) {   
-quit = 1;  
-}
-}
+
+
+
     neuralNetwork(renderer, r,1000,255);
     neuralNetwork(renderer, r,1000,150);
 
@@ -189,13 +183,16 @@ quit = 1;
     neuralNetwork(renderer, r,1000,255);
 
    
-}
+
 
 int alpha1, alpha2,alpha3,alpha4,alpha5;
 
 Uint32 startTime = SDL_GetTicks();
 Uint32 duration = 1000;
 
+
+SDL_Event e;
+int quit = 0;
 quit = 0;
 while (!quit) { 
 while (SDL_PollEvent(&e) != 0) { 
