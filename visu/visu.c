@@ -101,7 +101,7 @@ int r =25;
 Uint32 startTime2 = SDL_GetTicks();
 SDL_Event e; /*pour garder la fenetre ouverte */
 int quit = 0;
-while (!quit && SDL_GetTicks()<= startTime2+4000 ) { 
+while (!quit && SDL_GetTicks()<= startTime2+6000 ) { 
 while (SDL_PollEvent(&e) != 0) { 
 if (e.type == SDL_QUIT) {   
 quit = 1;  
@@ -109,10 +109,12 @@ quit = 1;
 }
     
     neuralNetwork(renderer, r,1000);
+
     SDL_Color textColor = {255, 255, 255, 255};//set color of text
+    SDL_Texture* textTexture;
 
     Uint32 startTime1 = SDL_GetTicks();
-    while(SDL_GetTicks() < startTime1+2000)//to print x for 2000ms
+    while(SDL_GetTicks() < startTime1+1500)//to print x for 2000ms
     {
         
         int j = 1;
@@ -120,8 +122,7 @@ quit = 1;
         char str2[50];
         
         for(int i = 200 ; i<=800;i+=80 ){ //input node
-        filledCircleRGBA(renderer, 300, i, r+10, 30, 30, 30, 255);
-        filledCircleRGBA(renderer, 300,i, r+10, 204, 0, 0, 255);
+        filledCircleRGBA(renderer, 300,i, r+10, 204, 0, 0, 255);//drow the x node bigger
 
         // concatinate 2 string#
         sprintf(str2, "%d", j);
@@ -131,20 +132,39 @@ quit = 1;
 
         // display x on node
         SDL_Surface* textSurface = TTF_RenderText_Solid(font, finalStr, textColor);
-        SDL_Texture* textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
+        textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
         SDL_FreeSurface(textSurface);
-        SDL_Rect textRect = {290, i-10, 30, 30};
+        SDL_Rect textRect = {290, i-10, 30, 30};//{x,y,w,h}
         SDL_RenderCopy(renderer, textTexture, NULL, &textRect);
         j++;
         }
+        SDL_RenderPresent(renderer);
+        
+    }
+
+    neuralNetwork(renderer, r,1000);
+
+    startTime1 = SDL_GetTicks();
+    while(SDL_GetTicks() < startTime1+1500)//to print y for 2000ms
+    {   
+
+        filledCircleRGBA(renderer, 1500, height/2, r+10, 0,128,255, 255);// drow y node bigger
+
+        //display Y test
+        SDL_Surface* textSurface = TTF_RenderText_Solid(font, "Y", textColor);
+        textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
+        SDL_FreeSurface(textSurface);
+        SDL_Rect textRect = {1500-10, height/2-10, 30, 30};
+        SDL_RenderCopy(renderer, textTexture, NULL, &textRect);
         SDL_RenderPresent(renderer);
     }
 
     neuralNetwork(renderer, r,1000);
 
 
-
-    
+    SDL_DestroyTexture(textTexture);
+    TTF_CloseFont(font);
+    TTF_Quit();
 }
 
 int alpha1, alpha2,alpha3,alpha4,alpha5;
