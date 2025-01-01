@@ -15,7 +15,7 @@ matrix* predict(matrix* x_sample, Parameters* params) {
 int main ()
 {
     
-    Parameters* params = initialisation(8, 1, 10, 5);
+    Parameters* params = initialisation(8, 1, 10, 4);
 
     load_weight_bias(params, "../model_neural/weight.csv", "../model_neural/bias.csv");
 

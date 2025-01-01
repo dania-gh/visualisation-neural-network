@@ -71,7 +71,7 @@ int main() {
     
 
 
-    params = initialisation(8, 1, 10, 6);
+    params = initialisation(8, 1, 10, 4);
 
 
     for (int epoch = 0; epoch < epochs; epoch++) 
@@ -130,7 +130,7 @@ int main() {
           
     }
 
-    save_data(params, "weight.csv","bias.csv");
+    save_weight_bias(params, "weight.csv","bias.csv");
 
     printf("\nRésultats après entraînement :\n");
 
