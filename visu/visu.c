@@ -5,7 +5,7 @@
 int width = 1800;
 int height = 950 ;
 
-void neuralNetwork(SDL_Renderer* renderer,int r,int time){
+void neuralNetwork(SDL_Renderer* renderer,int r,int time,int a){
     Uint32 startTime1 = SDL_GetTicks();
     while(SDL_GetTicks() < startTime1+time)
     {
@@ -17,38 +17,38 @@ void neuralNetwork(SDL_Renderer* renderer,int r,int time){
         for (int i = 100; i <= 880; i += 80)
         {
         for (int j = 100; j <= 880; j += 80) {
-        lineRGBA(renderer, 600, i, 900, j, i, 100, 200, 255); //line between fist and second layers
-        lineRGBA(renderer, 900, i, 1200, j, 100, 200, i, 255);//line between second and third layers
+        lineRGBA(renderer, 600, i, 900, j, i, 100, 200, a); //line between fist and second layers
+        lineRGBA(renderer, 900, i, 1200, j, 100, 200, i, a);//line between second and third layers
         }
         }
         for (int i = 100; i <= 880; i += 80) {
         for(int j = 200 ; j<=800;j+=80)
         {
-            lineRGBA(renderer, 300, j, 600, i, 204, 0, 0, 255);//lines between input and fist layer
+            lineRGBA(renderer, 300, j, 600, i, 204, 0, 0, a);//lines between input and fist layer
         }
 
 
 
-        lineRGBA(renderer, 1200, i, 1500, height / 2, 0,128,255, 255); //line between last layers and output
+        lineRGBA(renderer, 1200, i, 1500, height / 2, 0,128,255, a); //line between last layers and output
 
         filledCircleRGBA(renderer, 600, i, r, 30, 30, 30, 255); //first layer background
         filledCircleRGBA(renderer, 900, i, r, 30, 30, 30, 255);//second layer background
         filledCircleRGBA(renderer, 1200, i, r, 30, 30, 30, 255);//third layer background
 
 
-        filledCircleRGBA(renderer, 600, i, r, i, 100, 200, 255); //first layer
-        filledCircleRGBA(renderer, 900, i, r, 100, 200, i, 255);//second layer
-        filledCircleRGBA(renderer, 1200, i, r, 100,i, 200, 255);//third layer
+        filledCircleRGBA(renderer, 600, i, r, i, 100, 200, a); //first layer
+        filledCircleRGBA(renderer, 900, i, r, 100, 200, i, a);//second layer
+        filledCircleRGBA(renderer, 1200, i, r, 100,i, 200, a);//third layer
         }
         for(int i = 200 ; i<=800;i+=80 ){ //input node
             filledCircleRGBA(renderer, 300, i, r, 30, 30, 30, 255);
-            filledCircleRGBA(renderer, 300,i, r, 204, 0, 0, 255);
+            filledCircleRGBA(renderer, 300,i, r, 204, 0, 0, a);
         }
 
 
         //output node
         filledCircleRGBA(renderer, 1500, height/2, r, 30, 30, 30, 255);
-        filledCircleRGBA(renderer, 1500, height/2, r, 0,128,255, 255);
+        filledCircleRGBA(renderer, 1500, height/2, r, 0,128,255, a);
 
 
 
@@ -108,7 +108,7 @@ quit = 1;
 }
 }
     
-    neuralNetwork(renderer, r,1000);
+    neuralNetwork(renderer, r,1000,255);
 
     SDL_Color textColor = {255, 255, 255, 255};//set color of text
     SDL_Texture* textTexture;
@@ -142,7 +142,7 @@ quit = 1;
         
     }
 
-    neuralNetwork(renderer, r,1000);
+    neuralNetwork(renderer, r,1000,255);
 
     startTime1 = SDL_GetTicks();
     while(SDL_GetTicks() < startTime1+1500)//to print y for 2000ms
@@ -159,7 +159,8 @@ quit = 1;
         SDL_RenderPresent(renderer);
     }
 
-    neuralNetwork(renderer, r,1000);
+    neuralNetwork(renderer, r,1000,150);
+    
 
 
     SDL_DestroyTexture(textTexture);
