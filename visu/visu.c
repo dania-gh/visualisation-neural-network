@@ -1,8 +1,8 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL2_gfxPrimitives.h>
 #include <stdio.h>
-int width = 1000;
-int height = 1000 ;
+int width = 1800;
+int height = 950 ;
 
 int main(int argc, char* argv[]) {
 if (SDL_Init(SDL_INIT_VIDEO) < 0) {
@@ -101,7 +101,7 @@ alpha4 = 70;
 
 
 
-int r = 40;
+int r =25;
 
 for (int i = 200; i <= 800; i += 200)
 {
@@ -109,26 +109,30 @@ for (int j = 200; j <= 800; j += 200) {
 lineRGBA(renderer, 350, i, 650, j, i, 100, 200, alpha2);
 }
 }
-for (int i = 200; i <= 800; i += 200) {
+for (int i = 100; i <= 880; i += 80) {
 
 lineRGBA(renderer, 100, height / 2 - 100, 350, i, 204, 0, 0, alpha1); 
 lineRGBA(renderer, 100, height / 2 + 100, 350, i, 255, 128, 0, alpha1);
 lineRGBA(renderer, 650, i, 900, height / 2, 0,128,255, alpha3); 
 
-filledCircleRGBA(renderer, 350, i, r, 30, 30, 30, 255); //so the line doesnt apear
-filledCircleRGBA(renderer, 650, i, r, 30, 30, 30, 255);
+filledCircleRGBA(renderer, 600, i, r, 30, 30, 30, 255); //first layer
+filledCircleRGBA(renderer, 900, i, r, 30, 30, 30, 255);//second layer
+filledCircleRGBA(renderer, 1200, i, r, 30, 30, 30, 255);//third layer
 
-filledCircleRGBA(renderer, 350, i, r, i, 100, 200, alpha2); 
-filledCircleRGBA(renderer, 650, i, r, 100, 200, i, alpha3);
+
+filledCircleRGBA(renderer, 600, i, r, i, 100, 200, alpha2); 
+filledCircleRGBA(renderer, 900, i, r, 100, 200, i, alpha3);
+filledCircleRGBA(renderer, 1200, i, r, 100,i, 200, 255);
+}
+for(int i = 200 ; i<=800;i+=80 ){
+    filledCircleRGBA(renderer, 300, i, r, 30, 30, 30, 255);
+    filledCircleRGBA(renderer, 300,i, r, 204, 0, 0, alpha1);
 }
 
-filledCircleRGBA(renderer, 100, height/2-100, r, 30, 30, 30, 255);
-filledCircleRGBA(renderer, 100, height/2+100, r, 30, 30, 30, 255);
-filledCircleRGBA(renderer, 900, height/2, r, 30, 30, 30, 255);
 
-filledCircleRGBA(renderer, 100, height/2-100, r, 204, 0, 0, alpha1);
-filledCircleRGBA(renderer, 100, height/2+100, r, 255, 128, 0, alpha1);
-filledCircleRGBA(renderer, 900, height/2, r, 0,128,255, alpha4);
+//output
+filledCircleRGBA(renderer, 1500, height/2, r, 30, 30, 30, 255);
+filledCircleRGBA(renderer, 1500, height/2, r, 0,128,255, alpha4);
 
 
 
