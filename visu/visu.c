@@ -5,12 +5,20 @@
 int width = 1800;
 int height = 950 ;
 
+
+
 int main(int argc, char* argv[]) {
 if (SDL_Init(SDL_INIT_VIDEO) < 0) {
 printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
 SDL_Quit();
 return 1;
 }
+
+if (TTF_Init() == -1) {
+        printf("TTF_Init: %s\n", TTF_GetError());
+        SDL_Quit();
+        return 1;
+    }
 
 SDL_Window* window = SDL_CreateWindow("Neural Network Visualisation", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
 if (!window) {
@@ -27,24 +35,28 @@ SDL_Quit();
 return 1;
 }
 
-/*if (TTF_Init() == -1) {
-    printf("TTF_Init: %s\n", TTF_GetError());
-    SDL_Quit();
-    return 1;
-}*/
+TTF_Font* font = TTF_OpenFont("font1.ttf", 24);
+    if (!font) {
+        printf("Failed to load font: %s\n", TTF_GetError());
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        TTF_Quit();
+        SDL_Quit();
+        return 1;
+    }
 
 int r =25;
 Uint32 startTime2 = SDL_GetTicks();
 SDL_Event e; /*pour garder la fenetre ouverte */
 int quit = 0;
-while (!quit && SDL_GetTicks()<= startTime2+6000 ) { 
+while (!quit && SDL_GetTicks()<= startTime2+4000 ) { 
 while (SDL_PollEvent(&e) != 0) { 
 if (e.type == SDL_QUIT) {   
 quit = 1;  
 }
 }
     Uint32 startTime1 = SDL_GetTicks();
-    while(SDL_GetTicks() < startTime1+3000)
+    while(SDL_GetTicks() < startTime1+1000)
     {
         SDL_SetRenderDrawColor(renderer, 30, 30, 30, 255);
         SDL_RenderClear(renderer);
@@ -98,9 +110,21 @@ quit = 1;
     startTime1 = SDL_GetTicks();
     while(SDL_GetTicks() < startTime1+3000)
     {
+        SDL_Color textColor = {255, 255, 255, 255};
+        
+
+        
+
+
         for(int i = 200 ; i<=800;i+=80 ){ //input node
         filledCircleRGBA(renderer, 300, i, r+10, 30, 30, 30, 255);
         filledCircleRGBA(renderer, 300,i, r+10, 204, 0, 0, 255);
+
+        SDL_Surface* textSurface = TTF_RenderText_Solid(font, "x", textColor);
+        SDL_Texture* textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
+        SDL_FreeSurface(textSurface);
+        SDL_Rect textRect = {290, i-10, 20, 20};
+        SDL_RenderCopy(renderer, textTexture, NULL, &textRect);
         }
         SDL_RenderPresent(renderer);
     }
