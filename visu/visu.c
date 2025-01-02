@@ -158,7 +158,7 @@ int r =25;
     neuralNetwork(renderer, r,1000,150);
 
     startTime1 = SDL_GetTicks();
-    while(SDL_GetTicks() < startTime1+4000)//segmoid zoomed
+    while(SDL_GetTicks() < startTime1+5000)//segmoid zoomed
     {   
         SDL_SetRenderDrawColor(renderer, 30, 30, 30, 255);
         SDL_RenderClear(renderer);
@@ -224,9 +224,9 @@ int r =25;
             SDL_RenderCopy(renderer, textTexture, NULL, &textRect);
         }
 
-        if (SDL_GetTicks() > startTime1+5000){
+        if (SDL_GetTicks() > startTime1+5000 && SDL_GetTicks() < startTime1+6000){//move sgmoid text down
         int i = 150;
-        while(i<400){//move sgmoid text down
+        while(i<400){
             SDL_SetRenderDrawColor(renderer, 30, 30, 30, 255);
             SDL_RenderClear(renderer);
 
@@ -243,7 +243,7 @@ int r =25;
             textRect.y = i;
             textRect.w = 300;
             textRect.h = 60;
-            i+=5;
+            i+=2;
             SDL_RenderCopy(renderer, textTexture, NULL, &textRect);
             filledCircleRGBA(renderer, 1400,500, r*7, 200, 100, 200, 255);// 3th node
             SDL_RenderPresent(renderer);
@@ -253,28 +253,9 @@ int r =25;
 
         SDL_RenderPresent(renderer);
     }
-    /*
-    int i = 1400;
-    while(i>600){//slide the 3th node to left
-        SDL_SetRenderDrawColor(renderer, 30, 30, 30, 255);
-        SDL_RenderClear(renderer);
-        
-        filledCircleRGBA(renderer, i,500, r*7, 200, 100, 200, 255);// 3th node
-        i-=10;
+    
 
-        SDL_RenderPresent(renderer);
-    }
-
-    startTime1 = SDL_GetTicks();
-    while(SDL_GetTicks() < startTime1+2000){
-
-        filledCircleRGBA(renderer, 600,500, r*7, 200, 100, 200, 255);
-
-
-        SDL_RenderPresent(renderer);
-    }*/
-
-    neuralNetwork(renderer, r,1000,255);
+    neuralNetwork(renderer, r,500,70);//drow the model 
 
     startTime1 = SDL_GetTicks();
     while(SDL_GetTicks() < startTime1+1500)//to make hidden layer node bigger
@@ -290,6 +271,7 @@ int r =25;
         SDL_RenderPresent(renderer);
     }
 
+    neuralNetwork(renderer, r,1000,70);
     
 
    
