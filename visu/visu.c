@@ -158,7 +158,7 @@ int r =25;
     neuralNetwork(renderer, r,1000,150);
 
     startTime1 = SDL_GetTicks();
-    while(SDL_GetTicks() < startTime1+5000)//segmoid zoomed
+    while(SDL_GetTicks() < startTime1+4000)//segmoid zoomed
     {   
         SDL_SetRenderDrawColor(renderer, 30, 30, 30, 255);
         SDL_RenderClear(renderer);
@@ -170,7 +170,7 @@ int r =25;
         filledCircleRGBA(renderer, 600,700, r*4, 204, 0, 0, 255);// input 2
         filledCircleRGBA(renderer, 1400,500, r*7, 200, 100, 200, 255);// 3th node
 
-        textSurface = TTF_RenderText_Solid(font, "Forword propagation", textColor);
+        textSurface = TTF_RenderText_Solid(font, "Forward propagation", textColor);
         textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
         SDL_FreeSurface(textSurface);
         SDL_Rect textRect = {20, 20, 300, 100};//{x,y,w,h}
@@ -205,7 +205,7 @@ int r =25;
             SDL_RenderCopy(renderer, textTexture, NULL, &textRect3);
         }
         
-        if (SDL_GetTicks() > startTime1+3000){
+        if (SDL_GetTicks() > startTime1+4000){
         textSurface = TTF_RenderText_Solid(font, "x1*w1 + x2*w2 + bias", textColor);//write x1*w1 + x2*w2 + bias
         textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
         SDL_FreeSurface(textSurface);
@@ -214,13 +214,47 @@ int r =25;
         textRect.w = 300;
         textRect.h = 60;
         SDL_RenderCopy(renderer, textTexture, NULL, &textRect);
+        textSurface = TTF_RenderText_Solid(font, "Sigmoid", textColor);//write sigmoid
+            textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
+            SDL_FreeSurface(textSurface);
+            textRect.x = 1260;
+            textRect.y = 150;
+            textRect.w = 300;
+            textRect.h = 60;
+            SDL_RenderCopy(renderer, textTexture, NULL, &textRect);
+        }
+
+        if (SDL_GetTicks() > startTime1+5000){
+        int i = 150;
+        while(i<400){//move sgmoid text down
+            SDL_SetRenderDrawColor(renderer, 30, 30, 30, 255);
+            SDL_RenderClear(renderer);
+
+            lineRGBA(renderer, 600,300, 1400,500,100, 200, 100, 255);//input 1 line
+            lineRGBA(renderer, 600,700, 1400,500, 100, 200, 100, 255);// input 2 line
+
+            filledCircleRGBA(renderer, 600,300, r*4, 204, 0, 0, 255);//input 1
+            filledCircleRGBA(renderer, 600,700, r*4, 204, 0, 0, 255);// input 2
+            
+            textSurface = TTF_RenderText_Solid(font, "Sigmoid", textColor);//write sigmoid
+            textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
+            SDL_FreeSurface(textSurface);
+            textRect.x = 1260;
+            textRect.y = i;
+            textRect.w = 300;
+            textRect.h = 60;
+            i+=5;
+            SDL_RenderCopy(renderer, textTexture, NULL, &textRect);
+            filledCircleRGBA(renderer, 1400,500, r*7, 200, 100, 200, 255);// 3th node
+            SDL_RenderPresent(renderer);
+        }
         }
         
 
         SDL_RenderPresent(renderer);
     }
+    /*
     int i = 1400;
-    startTime1 = SDL_GetTicks();
     while(i>600){//slide the 3th node to left
         SDL_SetRenderDrawColor(renderer, 30, 30, 30, 255);
         SDL_RenderClear(renderer);
@@ -231,9 +265,18 @@ int r =25;
         SDL_RenderPresent(renderer);
     }
 
+    startTime1 = SDL_GetTicks();
+    while(SDL_GetTicks() < startTime1+2000){
+
+        filledCircleRGBA(renderer, 600,500, r*7, 200, 100, 200, 255);
 
 
-    /*startTime1 = SDL_GetTicks();
+        SDL_RenderPresent(renderer);
+    }*/
+
+    neuralNetwork(renderer, r,1000,255);
+
+    startTime1 = SDL_GetTicks();
     while(SDL_GetTicks() < startTime1+1500)//to make hidden layer node bigger
     { 
         for (int i = 100; i <= 880; i += 80) {
@@ -245,9 +288,9 @@ int r =25;
         
         }
         SDL_RenderPresent(renderer);
-    }*/
+    }
 
-    //neuralNetwork(renderer, r,1000,255);
+    
 
    
 
@@ -376,7 +419,7 @@ filledCircleRGBA(renderer, 1500, height/2, r, 0,128,255, alpha5);
 
 
 if(SDL_GetTicks() - startTime < duration + 3000){
-    textSurface = TTF_RenderText_Solid(font, "Forword propagation", textColor);
+    textSurface = TTF_RenderText_Solid(font, "Forward propagation", textColor);
 }else {
     textSurface = TTF_RenderText_Solid(font, "Back propagation", textColor);
 }
