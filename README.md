@@ -6,8 +6,8 @@ This repository contains two branches, each focusing on different stages of deve
 
 To get started, it was necessary to learn the basics of neural networks by working directly with a dataset. However, our main dataset (768 rows and 9 columns) was too large to test a simple model. Therefore, we decided to generate a custom dataset using Python. This led to the creation of two branches:
 
-- **Branch 1**: Contains a simplified dataset to test basic neural network functionality.
-- **Branch 2**: Implements the final model using the larger dataset for diabetes prediction.
+- **Branch 1 (main)**: Contains a simplified dataset to test basic neural network functionality.
+- **Branch 2 (model-2)**: Implements the final model using the larger dataset for diabetes prediction.
 
 Both branches include visualizations of the model using SDL, enabling a clear view of the model's structure and progress.
 
