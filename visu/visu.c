@@ -163,7 +163,7 @@ int r =25;
     {
         int a;
         if (SDL_GetTicks() < startTime1+2000){
-            a = 240;
+            a = 255;
         }else  {
             a = 70;
         }
