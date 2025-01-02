@@ -53,3 +53,4 @@ Both branches include visualizations of the model using SDL, enabling a clear vi
 
 ![Log Loss by epoch](image-video/image1.png)
 ![Model test results](image-video/image2.png)
+![visualisation sdl](image-video/visualisation-MadewithClipchamp.gif)
