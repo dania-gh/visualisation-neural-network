@@ -205,7 +205,7 @@ int r =25;
             SDL_RenderCopy(renderer, textTexture, NULL, &textRect3);
         }
         
-        if (SDL_GetTicks() > startTime1+3000){
+        if (SDL_GetTicks() > startTime1+3000 && SDL_GetTicks() < startTime1+7000){
         textSurface = TTF_RenderText_Solid(font, "x1*w1 + x2*w2 + bias", textColor);//write x1*w1 + x2*w2 + bias
         textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
         SDL_FreeSurface(textSurface);
@@ -267,11 +267,17 @@ int r =25;
     }
     
 
-    neuralNetwork(renderer, r,500,70);//drow the model 
-
+    neuralNetwork(renderer, r,100,70);//drow the model 
+    
     startTime1 = SDL_GetTicks();
     while(SDL_GetTicks() < startTime1+1500)//to make hidden layer node bigger
     { 
+        textSurface = TTF_RenderText_Solid(font, "Forward propagation", textColor);
+        textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
+        SDL_FreeSurface(textSurface);
+        SDL_Rect textRect = {20, 20, 300, 100};//{x,y,w,h}
+        SDL_RenderCopy(renderer, textTexture, NULL, &textRect);
+
         for (int i = 100; i <= 880; i += 80) {
         
         filledCircleRGBA(renderer, 600, i, r+10, i, 100, 200, 255); //first layer
