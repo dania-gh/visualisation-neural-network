@@ -22,7 +22,7 @@ This repository contains two branches focusing on different stages of developing
 ### Branch 2: Model-2 **Final Model for Diabetes Prediction**
 
 1. **Dataset Source**:
-   - The dataset was sourced from Kaggle, containing 500 rows and 9 columns.
+   - The dataset was sourced from Kaggle, containing 767 rows and 9 columns.
 
 2. **Dataset Splitting**:
    - Split the dataset into 70% for training and 30% for testing.
