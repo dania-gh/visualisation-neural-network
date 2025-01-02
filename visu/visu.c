@@ -158,7 +158,7 @@ int r =25;
     neuralNetwork(renderer, r,1000,150);
 
     startTime1 = SDL_GetTicks();
-    while(SDL_GetTicks() < startTime1+5000)//segmoid zoomed
+    while(SDL_GetTicks() < startTime1+9000)//segmoid zoomed
     {   
         SDL_SetRenderDrawColor(renderer, 30, 30, 30, 255);
         SDL_RenderClear(renderer);
@@ -205,7 +205,7 @@ int r =25;
             SDL_RenderCopy(renderer, textTexture, NULL, &textRect3);
         }
         
-        if (SDL_GetTicks() > startTime1+4000){
+        if (SDL_GetTicks() > startTime1+3000){
         textSurface = TTF_RenderText_Solid(font, "x1*w1 + x2*w2 + bias", textColor);//write x1*w1 + x2*w2 + bias
         textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
         SDL_FreeSurface(textSurface);
@@ -226,7 +226,7 @@ int r =25;
 
         if (SDL_GetTicks() > startTime1+5000 && SDL_GetTicks() < startTime1+6000){//move sgmoid text down
         int i = 150;
-        while(i<400){
+        while(i<470){
             SDL_SetRenderDrawColor(renderer, 30, 30, 30, 255);
             SDL_RenderClear(renderer);
 
@@ -235,7 +235,7 @@ int r =25;
 
             filledCircleRGBA(renderer, 600,300, r*4, 204, 0, 0, 255);//input 1
             filledCircleRGBA(renderer, 600,700, r*4, 204, 0, 0, 255);// input 2
-            
+            filledCircleRGBA(renderer, 1400,500, r*7, 200, 100, 200, 255);// 3th node
             textSurface = TTF_RenderText_Solid(font, "Sigmoid", textColor);//write sigmoid
             textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
             SDL_FreeSurface(textSurface);
@@ -245,9 +245,21 @@ int r =25;
             textRect.h = 60;
             i+=2;
             SDL_RenderCopy(renderer, textTexture, NULL, &textRect);
-            filledCircleRGBA(renderer, 1400,500, r*7, 200, 100, 200, 255);// 3th node
+            
             SDL_RenderPresent(renderer);
         }
+        }
+        if (SDL_GetTicks() > startTime1+6000 ){
+
+            filledCircleRGBA(renderer, 1400,500, r*7+10, 200, 100, 200, 255);// 3th node
+            textSurface = TTF_RenderText_Solid(font, "Sigmoid", textColor);//write sigmoid
+            textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
+            SDL_FreeSurface(textSurface);
+            textRect.x = 1260;
+            textRect.y = 470;
+            textRect.w = 300;
+            textRect.h = 60;
+            SDL_RenderCopy(renderer, textTexture, NULL, &textRect);
         }
         
 
