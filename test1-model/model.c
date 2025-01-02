@@ -8,53 +8,8 @@
 #include "back_propagation.h"
 #include "load.h"
 #include "save.h"
+#include "evaluation.h"
 
-
-void confusion_matrix(matrix* output_test, matrix* output_test_predect , int *TP, int *TN, int *FP, int *FN) {
-    *TP = *TN = *FP = *FN = 0; 
-
-    if (output_test->row != output_test_predect->row || output_test->col != output_test_predect->col) {
-        printf("Erreur : Les matrices doivent avoir les mêmes dimensions.\n");
-        return;
-    }
-
-    for (int i = 0; i < output_test->row; i++) {
-        for (int j = 0; j < 1; j++) {
-            int actual = (int)output_test->values[i][0];
-            int predicted ;
-            if (output_test_predect->values[i][0] >= 0.5)
-            {
-                predicted =1;
-            }
-            else
-            {
-                predicted =0;
-            }
-            
-
-            if (actual == 1 && predicted == 1) {
-                (*TP)++;
-            } else if (actual == 0 && predicted == 0) {
-                (*TN)++;
-            } else if (actual == 0 && predicted == 1) {
-                (*FP)++;
-            } else if (actual == 1 && predicted == 0) {
-                (*FN)++;
-            }
-        }
-    }
-}
-
-void copyPredictions(matrix* output, matrix* output_test_predect) {
-    if (output_test_predect->row != output->row || output_test_predect->col != 1) {
-        printf("Erreur : Dimensions incompatibles entre les matrices.\n");
-        return;
-    }
-
-    for (int i = 0; i < output_test_predect->row; i++) {
-        output_test_predect->values[i][0] = output->values[i][0]; // Copie la première colonne
-    }
-}
 
 void freeActivations(activation* activations) {
     for (int i = 0; i < activations->nb_layers; i++) {
@@ -98,12 +53,6 @@ int main ()
         freeActivations(activations); 
     }
     
-
-    int TP, TN, FP, FN;
-    confusion_matrix(output_test, output_test_predect, &TP, &TN, &FP, &FN);
-    printf("Matrice de confusion of input data test  :\n");
-    printf("TP = %d, TN = %d, FP = %d, FN = %d\n", TP, TN, FP, FN);
-
     for (int i = 0; i < 500; i++) {
         matrix* input_normalise_training_sample = createMatrix(8, 1);
         for (int j = 0; j < 8; j++) {
@@ -119,13 +68,49 @@ int main ()
         freeActivations(activations);
     }
 
+
+    int TP, TN, FP, FN;
+    double accur;
+    double preci;
+    double rec;
+    double f1;
+
+
+
+    confusion_matrix(output_test, output_test_predect, &TP, &TN, &FP, &FN);
+    accur=accuracy(TP ,TN, FP, FN);
+    preci=precision(TP,FP);
+    rec=recall(TP,FN);
+    f1=f1_score(preci,rec);
+    printf("evaluation of data tests: \n "); 
+    printf("Matrice de confusion :\n");
+    printf("TP = %d, TN = %d, FP = %d, FN = %d\n", TP, TN, FP, FN);
+    printf("Acurancy = %f\n", accur);
+    printf("Precision = %f\n",preci);
+    printf("Recall = %f\n",rec);
+    printf("F1_score = %f\n",f1);
+
+
     printf("\n");
     printf("\n");
     printf("\n");
 
     confusion_matrix(output_training, output_training_predect, &TP, &TN, &FP, &FN);
-    printf("Matrice de confusion of input data training  :\n");
+    accur=accuracy(TP ,TN, FP, FN);
+    preci=precision(TP,FP);
+    rec=recall(TP,FN);
+    f1=f1_score(preci,rec);
+    printf("evaluation of data training: \n "); 
+    printf("Matrice de confusion  :\n");
     printf("TP = %d, TN = %d, FP = %d, FN = %d\n", TP, TN, FP, FN);
+    printf("Acurancy = %f\n", accur);
+    printf("Precision = %f\n",preci);
+    printf("Recall = %f\n",rec);
+    printf("F1_score = %f\n",f1);
+
+
+
+
 
     freeMatrix(input_normalise_test);
     freeMatrix(output_test);
@@ -134,16 +119,8 @@ int main ()
     freeMatrix(output_training);
     freeMatrix(output_training_predect);
     
-
-
-    
-
     return 0;
 }
-
-
-/*printf("Entrées : %.1f, %.1f | Sortie calculée : %.2f | Sortie attendue : %.1f\n",
-        input_normalise_test->values[i][0], input_normalise_test->values[i][1], output->values[0][0], output_test->values[i][0]);*/
 
 
 
