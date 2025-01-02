@@ -18,7 +18,7 @@ void matrix_fill(matrix* m,int n);
 matrix* matrix_copy(matrix* m);
 void printMatrix(matrix* m);
 void freeMatrix(matrix* m);
-
+void copyPredictions(matrix* output, matrix* output_test_predect);
 
 
 #endif

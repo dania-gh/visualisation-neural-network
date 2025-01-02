@@ -78,3 +78,14 @@ void freeMatrix(matrix* m)
     free(m->values);
     free(m);
 }
+
+void copyPredictions(matrix* output, matrix* output_test_predect) {
+    if (output_test_predect->row != output->row || output_test_predect->col != 1) {
+        printf("Erreur : Dimensions incompatibles entre les matrices.\n");
+        return;
+    }
+
+    for (int i = 0; i < output_test_predect->row; i++) {
+        output_test_predect->values[i][0] = output->values[i][0]; 
+    }
+}
