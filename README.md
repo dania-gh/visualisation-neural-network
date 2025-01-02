@@ -4,14 +4,14 @@
 
 This repository contains two branches focusing on different stages of developing a neural network model for predicting diabetes. Each branch includes visualizations of the model using SDL, enabling a clear view of the model's structure and performance throughout the process.
 
-### Branch 1: **Simplified Dataset and Basic Model**
+### Branch 1: Main  **Simplified Dataset and Basic Model**
 
 1. **Creation of a Simplified Dataset**:
    - Generated a custom dataset with 100 rows and 2 input columns.
    - The input parameters are stored in a CSV file, and the expected outputs in a separate CSV file.
 
 2. **Implementation of a Simple Neural Network Model**:
-   - Designed a model with 2 input neurons, 1 hidden layer with 2 neurons, and 1 output neuron.
+   - Designed a model with 2 input neurons, 2 hidden layer with 4 neurons, and 1 output neuron.
    - Trained the model using the simplified dataset and achieved a minimum loss function (J) of **0.03592** after several iterations.
 
 3. **Model Visualization with SDL**:
@@ -19,7 +19,7 @@ This repository contains two branches focusing on different stages of developing
 
 ---
 
-### Branch 2: **Final Model for Diabetes Prediction**
+### Branch 2: Model-2 **Final Model for Diabetes Prediction**
 
 1. **Dataset Source**:
    - The dataset was sourced from Kaggle, containing 500 rows and 9 columns.
