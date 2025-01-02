@@ -44,3 +44,8 @@ double precision(int TP, int FP) {
     return (double)TP / (TP + FP);
 }
 
+double recall(int TP, int FN) {
+    if (TP + FN == 0) return 0.0; 
+    return (double)TP / (TP + FN);
+}
+
