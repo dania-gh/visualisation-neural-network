@@ -158,7 +158,7 @@ int r =25;
     neuralNetwork(renderer, r,1000,150);
 
     startTime1 = SDL_GetTicks();
-    while(SDL_GetTicks() < startTime1+4000)//segmoid zoomed
+    while(SDL_GetTicks() < startTime1+5000)//segmoid zoomed
     {   
         SDL_SetRenderDrawColor(renderer, 30, 30, 30, 255);
         SDL_RenderClear(renderer);
@@ -176,40 +176,45 @@ int r =25;
         SDL_Rect textRect = {20, 20, 300, 100};//{x,y,w,h}
         SDL_RenderCopy(renderer, textTexture, NULL, &textRect);
 
-        textSurface = TTF_RenderText_Solid(font, "X1", textColor);//write x1 in node 1
-        textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
-        SDL_FreeSurface(textSurface);
-        SDL_Rect textRect1 = {600-20,300-20, 70, 40};
-        SDL_RenderCopy(renderer, textTexture, NULL, &textRect1);
+        if (SDL_GetTicks() > startTime1+1000){
+            textSurface = TTF_RenderText_Solid(font, "X1", textColor);//write x1 in node 1
+            textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
+            SDL_FreeSurface(textSurface);
+            SDL_Rect textRect1 = {600-20,300-20, 70, 40};
+            SDL_RenderCopy(renderer, textTexture, NULL, &textRect1);
+            
+
+            textSurface = TTF_RenderText_Solid(font, "X2", textColor);//write x2 in node 2
+            textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
+            SDL_FreeSurface(textSurface);
+            SDL_Rect textRect2 = {600-20,700-20, 70, 40};
+            SDL_RenderCopy(renderer, textTexture, NULL, &textRect2);
+        }
         
+        if (SDL_GetTicks() > startTime1+2000){
+            textSurface = TTF_RenderText_Solid(font, "w1", textColor);//write w1 in line 1
+            textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
+            SDL_FreeSurface(textSurface);
+            SDL_Rect textRect4 = {1000,350, 70, 40};
+            SDL_RenderCopy(renderer, textTexture, NULL, &textRect4);
 
-        textSurface = TTF_RenderText_Solid(font, "X2", textColor);//write x2 in node 2
-        textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
-        SDL_FreeSurface(textSurface);
-        SDL_Rect textRect2 = {600-20,700-20, 70, 40};
-        SDL_RenderCopy(renderer, textTexture, NULL, &textRect2);
-
-        textSurface = TTF_RenderText_Solid(font, "w1", textColor);//write w1 in line 1
-        textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
-        SDL_FreeSurface(textSurface);
-        SDL_Rect textRect4 = {1000,350, 70, 40};
-        SDL_RenderCopy(renderer, textTexture, NULL, &textRect4);
-
-        textSurface = TTF_RenderText_Solid(font, "w2", textColor);//write w2 in line 2
-        textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
-        SDL_FreeSurface(textSurface);
-        SDL_Rect textRect3 = {1000,600, 70, 40};
-        SDL_RenderCopy(renderer, textTexture, NULL, &textRect3);
-
+            textSurface = TTF_RenderText_Solid(font, "w2", textColor);//write w2 in line 2
+            textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
+            SDL_FreeSurface(textSurface);
+            SDL_Rect textRect3 = {1000,600, 70, 40};
+            SDL_RenderCopy(renderer, textTexture, NULL, &textRect3);
+        }
+        
+        if (SDL_GetTicks() > startTime1+3000){
         textSurface = TTF_RenderText_Solid(font, "x1*w1 + x2*w2 + bias", textColor);//write x1*w1 + x2*w2 + bias
         textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
         SDL_FreeSurface(textSurface);
-        textRect3.x = 1260;
-        textRect3.y = 470;
-        textRect3.w = 300;
-        textRect3.h = 60;
-        SDL_RenderCopy(renderer, textTexture, NULL, &textRect3);
-        
+        textRect.x = 1260;
+        textRect.y = 470;
+        textRect.w = 300;
+        textRect.h = 60;
+        SDL_RenderCopy(renderer, textTexture, NULL, &textRect);
+        }
         
 
         SDL_RenderPresent(renderer);
