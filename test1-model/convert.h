@@ -5,6 +5,6 @@
 #include"matrice.h"
 
 void matrix_csv(const char *filename,int cols, int lin, matrix* mat);
-void creat_X_Y(matrix* X, matrix* Y);
+void creat_X_Y_Z(matrix* X, matrix* Y,matrix* Z)
 
 #endif
