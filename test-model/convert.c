@@ -25,6 +25,6 @@ void creat_X_Y(matrix* X, matrix* Y)
     const char *fileinput="input.csv";
     const char *fileoutput="output.csv";
 
-    matrix_csv(fileinput, 2, 100, X);
-    matrix_csv(fileoutput, 1, 100, Y);
+    matrix_csv(fileinput, 8, 267, X);
+    matrix_csv(fileoutput, 1, 267, Y);
 }
