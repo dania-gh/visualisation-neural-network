@@ -8,39 +8,41 @@
 #include "back_propagation.h"
 #include "load.h"
 
-matrix* predict(matrix* x_sample, Parameters* params) {
-    activation* activations = sigmoid(x_sample, params);
-    return activations->activ[params->num_layers - 1]; 
-}
 int main ()
 {
-    
+    matrix* X = createMatrix(267, 8);
+    matrix* Y = createMatrix(267, 1);
+    creat_X_Y(X, Y);
+
+    normalize_all_columns(X);
+    save_data("input_normalise.csv", X);
     Parameters* params = initialisation(8, 1, 10, 4);
 
-    load_weight_bias(params, "../model_neural/weight.csv", "../model_neural/bias.csv");
+    load_weight_bias(params, "weight.csv", "bias.csv");
 
-    matrix* nouvelle_entree = createMatrix(8, 1);
-    nouvelle_entree->values[0][0] = 1; 
-    nouvelle_entree->values[1][0] = 103; 
-    nouvelle_entree->values[2][0] = 30;
-    nouvelle_entree->values[3][0] = 38;
-    nouvelle_entree->values[4][0] = 83;
-    nouvelle_entree->values[5][0] = 43.3;
-    nouvelle_entree->values[6][0] = 0.183;
-    nouvelle_entree->values[7][0] = 33;
+    for (int i = 0; i < 267; i++) {
+        
+        matrix* x_sample = createMatrix(8, 1);
+        x_sample->values[0][0]=X->values[i][0];
+        x_sample->values[1][0]=X->values[i][1];
+        x_sample->values[2][0]=X->values[i][2];
+        x_sample->values[3][0]=X->values[i][3];
+        x_sample->values[4][0]=X->values[i][4];
+        x_sample->values[5][0]=X->values[i][5];
+        x_sample->values[6][0]=X->values[i][6];
+        x_sample->values[7][0]=X->values[i][7];
+
+        activation* activations = sigmoid(x_sample, params);
+
+        matrix* output = activations->activ[params->num_layers - 1];
 
 
-    matrix* sortie = predict(nouvelle_entree, params);
+        if (i % 10 == 0) {
+           printf("Entrées : %.1f, %.1f | Sortie calculée : %.2f | Sortie attendue : %.1f\n",
+            X->values[i][0], X->values[i][1], output->values[0][0], Y->values[i][0]);
+        }
 
-    printf("Entrées : %.2f, %.2f | Sortie prédite : %.2f\n", 
-        nouvelle_entree->values[0][0], nouvelle_entree->values[1][0], sortie->values[0][0]);
-
-    if (sortie->values[0][0] > 0.5) {
-        printf("Cette femme est  diabétique.\n");
-    } else {
-        printf("Cette femme n'est pas diabétique.\n");
     }
 
     return 0;
-
 }
