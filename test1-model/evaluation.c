@@ -34,3 +34,8 @@ void confusion_matrix(matrix* output_test, matrix* output_test_predect , int *TP
         }
     }
 }
+
+double accuracy(int TP, int TN, int FP, int FN) {
+    double total = TP + TN + FP + FN;
+    return (TP + TN) / total;
+}
