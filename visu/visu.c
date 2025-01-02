@@ -154,8 +154,71 @@ int r =25;
         SDL_RenderCopy(renderer, textTexture, NULL, &textRect);
         SDL_RenderPresent(renderer);
     }
+    neuralNetwork(renderer, r,1000,70);
 
-    neuralNetwork(renderer, r,1000,150);
+    
+
+    startTime1 = SDL_GetTicks();
+    while(SDL_GetTicks() < startTime1+4000)//display random weight
+    {
+        int a;
+        if (SDL_GetTicks() < startTime1+2000){
+            a = 240;
+        }else  {
+            a = 70;
+        }
+        SDL_SetRenderDrawColor(renderer, 30, 30, 30, 255);
+        SDL_RenderClear(renderer);
+        
+        
+        textSurface = TTF_RenderText_Solid(font, "Randome weights", textColor);
+        textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
+        SDL_FreeSurface(textSurface);
+        SDL_Rect textRect = {20, 20, 300, 100};//{x,y,w,h}
+        SDL_RenderCopy(renderer, textTexture, NULL, &textRect);
+
+        for (int i = 100; i <= 880; i += 80)
+        {
+        for (int j = 100; j <= 880; j += 80) {
+        lineRGBA(renderer, 600, i, 900, j, i, 100, 200, a); //line between fist and second layers
+        lineRGBA(renderer, 900, i, 1200, j, 100, 200, i, a);//line between second and third layers
+        }
+        }
+        for (int i = 100; i <= 880; i += 80) {
+        for(int j = 200 ; j<=800;j+=80)
+        {
+            lineRGBA(renderer, 300, j, 600, i, 204, 0, 0, a);//lines between input and fist layer
+        }
+
+
+
+        lineRGBA(renderer, 1200, i, 1500, height / 2, 0,128,255, a); //line between last layers and output
+
+        filledCircleRGBA(renderer, 600, i, r, 30, 30, 30, 255); //first layer background
+        filledCircleRGBA(renderer, 900, i, r, 30, 30, 30, 255);//second layer background
+        filledCircleRGBA(renderer, 1200, i, r, 30, 30, 30, 255);//third layer background
+
+
+        filledCircleRGBA(renderer, 600, i, r, i, 100, 200, 70); //first layer
+        filledCircleRGBA(renderer, 900, i, r, 100, 200, i, 70);//second layer
+        filledCircleRGBA(renderer, 1200, i, r, 100,i, 200, 70);//third layer
+        }
+        for(int i = 200 ; i<=800;i+=80 ){ //input node
+            filledCircleRGBA(renderer, 300, i, r, 30, 30, 30, 255);
+            filledCircleRGBA(renderer, 300,i, r, 204, 0, 0, 70);
+        }
+
+
+        //output node
+        filledCircleRGBA(renderer, 1500, height/2, r, 30, 30, 30, 255);
+        filledCircleRGBA(renderer, 1500, height/2, r, 0,128,255, 70);
+        
+        
+        SDL_RenderPresent(renderer);
+
+    }
+
+    neuralNetwork(renderer, r,1000,70);
 
     startTime1 = SDL_GetTicks();
     while(SDL_GetTicks() < startTime1+9000)//segmoid zoomed
