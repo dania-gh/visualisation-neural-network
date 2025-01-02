@@ -219,9 +219,19 @@ int r =25;
 
         SDL_RenderPresent(renderer);
     }
+    int i = 1400;
+    startTime1 = SDL_GetTicks();
+    while(i>600){//slide the 3th node to left
+        SDL_SetRenderDrawColor(renderer, 30, 30, 30, 255);
+        SDL_RenderClear(renderer);
+        
+        filledCircleRGBA(renderer, i,500, r*7, 200, 100, 200, 255);// 3th node
+        i-=10;
+
+        SDL_RenderPresent(renderer);
+    }
 
 
-      
 
     /*startTime1 = SDL_GetTicks();
     while(SDL_GetTicks() < startTime1+1500)//to make hidden layer node bigger
