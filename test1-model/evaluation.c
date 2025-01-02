@@ -49,3 +49,8 @@ double recall(int TP, int FN) {
     return (double)TP / (TP + FN);
 }
 
+double f1_score(double precision, double recall) {
+    if (precision + recall == 0) return 0.0; 
+    return 2 * (precision * recall) / (precision + recall);
+}
+
