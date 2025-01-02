@@ -51,5 +51,5 @@ Both branches include visualizations of the model using SDL, enabling a clear vi
 6. **Model Visualization with SDL**:
    - As with Branch 1, SDL was used to visualize the model, including its layers and the behavior of the network during training.
 
-![Log Loss by epoch](image-video/image1.jpg)
-![Model test results](image-video/image2.jpg)
+![Log Loss by epoch](image-video/image1.png)
+![Model test results](image-video/image2.png)
