@@ -39,3 +39,8 @@ double accuracy(int TP, int TN, int FP, int FN) {
     double total = TP + TN + FP + FN;
     return (TP + TN) / total;
 }
+double precision(int TP, int FP) {
+    if (TP + FP == 0) return 0.0; 
+    return (double)TP / (TP + FP);
+}
+
