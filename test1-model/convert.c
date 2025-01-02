@@ -20,14 +20,18 @@ void matrix_csv(const char *filename, int cols, int lin, matrix* mat) {
 
 
 
-void creat_X_Y_Z(matrix* X, matrix* Y,matrix* Z)
+void creat_X_Y_Z_W(matrix* X, matrix* Y,matrix* Z ,matrix* W )
 {
     const char *fileinput_normalise_test="input_normalise_test";
-    const char *fileoutput="output.csv";
+    const char *fileoutput_test="output_test.csv";
     const char *fileinput_normalise_training="input_normalise_training";
+    const char *fileoutput_training="output_training.csv";
 
     matrix_csv(fileinput_normalise_test, 8, 267, X);
-    matrix_csv(fileoutput, 1, 267, Y);
+    matrix_csv(fileoutput_test, 1, 267, Y);
     matrix_csv(fileinput_normalise_training ,8 , 500 ,Z);
+    matrix_csv(fileoutput_training ,1  , 500 , W);
+
+
 
 }
