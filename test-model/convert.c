@@ -22,7 +22,7 @@ void matrix_csv(const char *filename, int cols, int lin, matrix* mat) {
 
 void creat_X_Y(matrix* X, matrix* Y)
 {
-    const char *fileinput="input.csv";
+    const char *fileinput="input_normalise.csv";
     const char *fileoutput="output.csv";
 
     matrix_csv(fileinput, 8, 267, X);
