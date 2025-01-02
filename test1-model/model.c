@@ -9,6 +9,35 @@
 #include "load.h"
 #include "save.h"
 
+
+void confusion_matrix(matrix* output_test, matrix* output_test_predect , int *TP, int *TN, int *FP, int *FN) {
+    *TP = *TN = *FP = *FN = 0; 
+
+    if (output_test->row != output_test_predect->row || output_test->col != output_test_predect->col) {
+        printf("Erreur : Les matrices doivent avoir les mêmes dimensions.\n");
+        return;
+    }
+
+    for (int i = 0; i < output_test->row; i++) {
+        for (int j = 0; j < 1; j++) {
+            double actual = (double)output_test->values[i][0];
+            double predicted = (double)output_test_predect->values[i][0];
+
+            if (actual == 1 && predicted == 1) {
+                (*TP)++;
+            } else if (actual == 0 && predicted == 0) {
+                (*TN)++;
+            } else if (actual == 0 && predicted == 1) {
+                (*FP)++;
+            } else if (actual == 1 && predicted == 0) {
+                (*FN)++;
+            }
+        }
+    }
+}
+
+
+
 int main ()
 {
     matrix* input_normalise_test = createMatrix(267, 8);
@@ -19,7 +48,7 @@ int main ()
     matrix* output_training = createMatrix(500, 1);
     matrix* output_training_predect = createMatrix(500,1);
 
-    creat_input_normalise_test_Y_Z_W(input_normalise_test, output_test,input_normalise_training , output_training );
+    creat_X_Y_Z_W(input_normalise_test, output_test,input_normalise_training , output_training );
 
     Parameters* params = initialisation(8, 1, 10, 4);
 
@@ -41,10 +70,16 @@ int main ()
 
         activation* activations = sigmoid(input_normalise_test_sample, params);
 
-        matrix* output = activations->activ[params->num_layers - 1];
+        matrix* output =activations->activ[params->num_layers - 1];
 
-        output_test_predect->values=output->values;
+
     }
+
+    int TP, TN, FP, FN;
+    confusion_matrix(output_test , output_test_predect ,&TP, &TN, &FP, &FN);
+    printf("Matrice de confusion :\n");
+    printf("TP = %d, TN = %d, FP = %d, FN = %d\n", TP, TN, FP, FN);
+
 
 
     for (int i = 0; i < 500; i++)
@@ -62,9 +97,12 @@ int main ()
         activation* activations = sigmoid(input_normalise_training_sample, params);
 
         matrix* output = activations->activ[params->num_layers - 1];
-        
+
         output_training_predect->values=output->values;
     }
+
+
+
 
 
 
