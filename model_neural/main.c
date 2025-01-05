@@ -75,7 +75,7 @@ int main() {
     
 
 
-    params = initialisation(cols_x, cols_y, 8, 8);
+    params = initialisation(cols_x, cols_y, 10, 4);
 
 
     for (int epoch = 0; epoch < epochs; epoch++) 
