@@ -20,11 +20,11 @@ void matrix_csv(const char *filename, int cols, int lin, matrix* mat) {
 
 
 
-void creat_X_Y(matrix* X, matrix* Y)
+void creat_X_Y(matrix* X, matrix* Y ,int rows, int cols_x, int cols_y)
 {
     const char *fileinput="input.csv";
     const char *fileoutput="output.csv";
 
-    matrix_csv(fileinput, 8, 500, X);
-    matrix_csv(fileoutput, 1, 500, Y);
+    matrix_csv(fileinput, cols_x, rows, X);
+    matrix_csv(fileoutput, cols_y, rows, Y);
 }

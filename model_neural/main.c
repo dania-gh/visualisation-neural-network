@@ -61,9 +61,13 @@ Parameters* params;
 int main() {
     srand(time(NULL));
 
-    matrix* X = createMatrix(500, 8);
-    matrix* Y = createMatrix(500, 1);
-    creat_X_Y(X, Y);
+    int rows=500;
+    int cols_x=8;
+    int cols_y=1;
+
+    matrix* X = createMatrix(rows, cols_x);
+    matrix* Y = createMatrix(rows, cols_y);
+    creat_X_Y(X, Y , rows, cols_x, cols_y);
 
 
     normalize_all_columns(X);
@@ -71,7 +75,7 @@ int main() {
     
 
 
-    params = initialisation(8, 1, 10, 4);
+    params = initialisation(cols_x, cols_y, 8, 8);
 
 
     for (int epoch = 0; epoch < epochs; epoch++) 
@@ -81,10 +85,10 @@ int main() {
 
         
 
-        for (int i = 0; i < 500; i++) {
+        for (int i = 0; i < rows; i++) {
 
 
-            matrix* x_sample=createMatrix(8,1);
+            matrix* x_sample=createMatrix(cols_x,1);
             x_sample->values[0][0]=X->values[i][0];
             x_sample->values[1][0]=X->values[i][1];
             x_sample->values[2][0]=X->values[i][2];
@@ -102,7 +106,7 @@ int main() {
             
             total_log_loss += log_loss(Y->values[i][0], output->values[0][0]);
 
-            matrix* y_sample=createMatrix(1,1);
+            matrix* y_sample=createMatrix(cols_y,1);
             y_sample->values[0][0]=Y->values[i][0];
 
             gradient* g = back_propagation(x_sample, y_sample, params, activations);
@@ -134,9 +138,9 @@ int main() {
 
     printf("\nRésultats après entraînement :\n");
 
-    for (int i = 0; i < 500; i++) {
+    for (int i = 0; i < rows; i++) {
         
-        matrix* x_sample = createMatrix(8, 1);
+        matrix* x_sample = createMatrix(cols_x, 1);
         x_sample->values[0][0]=X->values[i][0];
         x_sample->values[1][0]=X->values[i][1];
         x_sample->values[2][0]=X->values[i][2];
