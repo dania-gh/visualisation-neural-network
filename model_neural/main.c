@@ -89,16 +89,11 @@ int main() {
 
 
             matrix* x_sample=createMatrix(cols_x,1);
-            x_sample->values[0][0]=X->values[i][0];
-            x_sample->values[1][0]=X->values[i][1];
-            x_sample->values[2][0]=X->values[i][2];
-            x_sample->values[3][0]=X->values[i][3];
-            x_sample->values[4][0]=X->values[i][4];
-            x_sample->values[5][0]=X->values[i][5];
-            x_sample->values[6][0]=X->values[i][6];
-            x_sample->values[7][0]=X->values[i][7];
+            for (int j = 0; j < cols_x; j++)
+            {
+                x_sample->values[j][0]=X->values[i][j];
+            }
 
-           
 
             activation* activations=sigmoid(x_sample,params);
             matrix* output = activations->activ[params->num_layers-1];
